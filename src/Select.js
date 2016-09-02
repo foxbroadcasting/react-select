@@ -9,6 +9,11 @@ import Async from './Async';
 import Option from './Option';
 import Value from './Value';
 
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
+import ValueSortContainer from './dnd/ValueSortContainer';
+import ValueSortItem from './dnd/ValueSortItem';
+
 function stringifyValue (value) {
 	if (typeof value === 'string') {
 		return value;
@@ -708,6 +713,15 @@ const Select = React.createClass({
 		}
 	},
 
+	reorderValue (srcIndex, targetIndex) {
+		if(srcIndex === targetIndex) return;
+		let value = [...this.props.value];
+		//const reOrdered = value.map((x,i) => { if (i === srcIndex) { return value[targetIndex]; } else if (i === targetIndex) { return value[srcIndex]; } else { return x; } });
+		const sliced = value.splice(srcIndex,  1);
+		value.splice(targetIndex, 0, ...sliced);
+		this.setValue(value);
+	},
+
 	renderLoading () {
 		if (!this.props.isLoading) return;
 		return (
@@ -726,19 +740,34 @@ const Select = React.createClass({
 		let onClick = this.props.onValueClick ? this.handleValueClick : null;
 		if (this.props.multi) {
 			return valueArray.map((value, i) => {
+				const id = `${this._instancePrefix}-value-${1}`;
 				return (
-					<ValueComponent
-						id={this._instancePrefix + '-value-' + i}
-						instancePrefix={this._instancePrefix}
-						disabled={this.props.disabled || value.clearableValue === false}
-						key={`value-${i}-${value[this.props.valueKey]}`}
-						onClick={onClick}
-						onRemove={this.removeValue}
-						value={value}
-					>
-						{renderLabel(value, i)}
-						<span className="Select-aria-only">&nbsp;</span>
-					</ValueComponent>
+					<ValueSortContainer
+						key={i}
+						index={i}
+						contextId={this._instancePrefix}
+						className="Select-value--Outer"
+						handleSorting={this.reorderValue}
+						>
+						<ValueSortItem
+							index={i}
+							contextId={this._instancePrefix}
+							>
+							<ValueComponent
+								id={id}
+								instancePrefix={this._instancePrefix}
+								disabled={this.props.disabled || value.clearableValue === false}
+								key={`value-${i}-${value[this.props.valueKey]}`}
+								onClick={onClick}
+								onRemove={this.removeValue}
+								value={value}
+								draggable={true}
+								>
+								{renderLabel(value)}
+								<span className="Select-aria-only">&nbsp;</span>
+							</ValueComponent>
+						</ValueSortItem>
+					</ValueSortContainer>
 				);
 			});
 		} else if (!this.state.inputValue) {
@@ -1070,4 +1099,7 @@ const Select = React.createClass({
 
 });
 
-export default Select;
+const SelectComposite = DragDropContext(HTML5Backend)(Select);
+SelectComposite.Async = Async;
+
+export default SelectComposite;
