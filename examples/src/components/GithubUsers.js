@@ -10,7 +10,8 @@ const GithubUsers = React.createClass({
 	},
 	getInitialState () {
 		return {
-			multi: true
+			multi: true,
+			reorder: true,
 		};
 	},
 	onChange (value) {
@@ -40,11 +41,16 @@ const GithubUsers = React.createClass({
 	gotoUser (value, event) {
 		window.open(value.html_url);
 	},
+	toggleReorder (e) {
+		this.setState({
+			reorder: e.target.checked
+		});
+	},
 	render () {
 		return (
 			<div className="section">
 				<h3 className="section-heading">{this.props.label}</h3>
-				<Select.Async multi={this.state.multi} value={this.state.value} onChange={this.onChange} onValueClick={this.gotoUser} valueKey="id" labelKey="login" loadOptions={this.getUsers} minimumInput={1} backspaceRemoves={false} />
+				<Select.Async multi={this.state.multi} value={this.state.value} onChange={this.onChange} valueKey="id" labelKey="login" loadOptions={this.getUsers} minimumInput={1} backspaceRemoves={false} reorder={this.state.reorder} />
 				<div className="checkbox-list">
 					<label className="checkbox">
 						<input type="radio" className="checkbox-control" checked={this.state.multi} onChange={this.switchToMulti}/>
@@ -53,6 +59,10 @@ const GithubUsers = React.createClass({
 					<label className="checkbox">
 						<input type="radio" className="checkbox-control" checked={!this.state.multi} onChange={this.switchToSingle}/>
 						<span className="checkbox-label">Single Value</span>
+					</label>
+					<label className="checkbox">
+						<input type="checkbox" className="checkbox-control" checked={this.state.reorder} onChange={this.toggleReorder} />
+						<span className="checkbox-label">Drag-and-drop</span>
 					</label>
 				</div>
 				<div className="hint">This example uses fetch.js for showing Async options with Promises</div>

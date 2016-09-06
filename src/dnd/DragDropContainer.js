@@ -1,28 +1,23 @@
 import React from 'react';
 import classNames from 'classnames';
 import { DropTarget } from 'react-dnd';
+import { MULTI_SELECT } from '../constants/dragDropTypes';
 
-const ValueSortContainer = React.createClass({
+const DragDropContainer = React.createClass({
 
-	displayName: 'ValueSortContainer',
+	displayName: 'DragDropContainer',
 
 	propTypes: {
 		canDrop: React.PropTypes.bool,
 		children: React.PropTypes.any,
+		className: React.PropTypes.string,
 		connectDropTarget: React.PropTypes.func,
-		handleSorting: React.PropTypes.func.isRequired,
-		isOver: React.PropTypes.bool.isRequired,
 		contextId: React.PropTypes.oneOfType([
 			React.PropTypes.number,
 			React.PropTypes.string
 		]),//Unique Identifier for the drag context (parent component which contains the dnd context)
-		className: React.PropTypes.string
-	},
-
-	getDefaultProps () {
-		return {
-			className: ''
-		};
+		handleSorting: React.PropTypes.func.isRequired,
+		isOver: React.PropTypes.bool.isRequired,
 	},
 
 	getInitialState () {
@@ -34,7 +29,7 @@ const ValueSortContainer = React.createClass({
 
 	render () {
 		const { connectDropTarget, isOver, canDrop, className } = this.props;
-		const allClassNames = classNames(className, { 'Sort-item--CanDrop': canDrop && isOver, 'Sort-item--CantDrop': !canDrop && isOver });
+		const allClassNames = classNames(className, { 'Select-drag-drop-item': canDrop && isOver, 'Select-drag-item': !canDrop && isOver });
 		return connectDropTarget(
 			<div className={allClassNames}>
 				{this.props.children}
@@ -73,4 +68,4 @@ function collect(connect, monitor) {
 	};
 }
 
-export default DropTarget('valueItem', target, collect)(ValueSortContainer);
+export default DropTarget(MULTI_SELECT, target, collect)(DragDropContainer);

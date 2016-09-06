@@ -1,35 +1,26 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
+import { MULTI_SELECT } from '../constants/dragDropTypes';
 
-const ValueSortItem = React.createClass({
+const DragDropItem = React.createClass({
 
-	displayName: 'ValueSortItem',
+	displayName: 'DragDropItem',
 
 	propTypes: {
 		children: React.PropTypes.any,
-		connectDragSource: React.PropTypes.func.isRequired,
 		connectDragPreview: React.PropTypes.func.isRequired,
+		connectDragSource: React.PropTypes.func.isRequired,
 		isDragging: React.PropTypes.bool.isRequired,
 		previewHeight: React.PropTypes.string,
 		previewHtml: React.PropTypes.any,
-		previewWidth: React.PropTypes.string,
 		previewUrl: React.PropTypes.oneOfType([
 			React.PropTypes.bool,
 			React.PropTypes.string,
 		]),
-	},
-
-	getDefaultProps () {
-		return {
-			previewHtml: false,
-			previewHeight: '200px',
-			previewWidth: '200px',
-			previewUrl: false
-		};
+		previewWidth: React.PropTypes.string,
 	},
 
 	render() {
-		//const url = `url(${this.props.url}) no-repeat`;
 		const { isDragging, connectDragSource, connectDragPreview, previewUrl, previewHtml } = this.props;
 		return connectDragSource(
 			<div>
@@ -41,7 +32,6 @@ const ValueSortItem = React.createClass({
 });
 
 const dragSource = {
-
 	beginDrag(props) {
 		return {
 			index: props.index,
@@ -67,4 +57,4 @@ function collect(connect, monitor) {
 	};
 }
 
-export default DragSource('valueItem', dragSource, collect)(ValueSortItem);
+export default DragSource(MULTI_SELECT, dragSource, collect)(DragDropItem);

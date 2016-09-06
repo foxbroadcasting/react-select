@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import shortid from 'shortid';
 
 const Value = React.createClass({
 
@@ -9,20 +8,11 @@ const Value = React.createClass({
 	propTypes: {
 		children: React.PropTypes.node,
 		disabled: React.PropTypes.bool,               // disabled prop passed to ReactSelect
-		id: React.PropTypes.oneOfType([              // Unique id for the value - used for aria
-			React.PropTypes.number,
-			React.PropTypes.string
-		]),
+		id: React.PropTypes.string,                   // Unique id for the value - used for aria
 		onClick: React.PropTypes.func,                // method to handle click on value label
 		onRemove: React.PropTypes.func,               // method to handle removal of the value
+		reorder: React.PropTypes.bool,                // enable drag-and-drop
 		value: React.PropTypes.object.isRequired,     // the option object for this value
-		draggable: React.PropTypes.bool,              // set drag-and-drop event
-	},
-
-	getDefaultProps () {
-		return {
-			id: shortid()
-		};
 	},
 
 	handleMouseDown (event) {
@@ -34,7 +24,7 @@ const Value = React.createClass({
 			this.props.onClick(this.props.value, event);
 			return;
 		}
-		if (this.props.value.href  || this.props.draggable) {
+		if (this.props.value.href  || this.props.reorder) {
 			event.stopPropagation();
 		}
 	},
