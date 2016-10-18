@@ -1153,5 +1153,7 @@ const Select = React.createClass({
 
 const SelectComposite = DragDropContext(HTML5Backend)(Select);
 SelectComposite.Async = Async;
+SelectComposite.AsyncCreatable = AsyncCreatable;
+SelectComposite.Creatable = Creatable;
 
 export default SelectComposite;

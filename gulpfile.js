@@ -31,8 +31,7 @@ var taskConfig = {
 		],
 		less: [
 			'example.less'
-		],
-		port: 8008
+		]
 	}
 
 };
