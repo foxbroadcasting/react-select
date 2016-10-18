@@ -9,13 +9,11 @@ React-Select
 A Select control built with and for [React](http://facebook.github.io/react/index.html). Initially built for use in [KeystoneJS](http://www.keystonejs.com).
 
 
-## New version 1.0.0-beta
+## New version 1.0.0-rc
 
-I've nearly completed a major rewrite of this component (see issue [#568](https://github.com/JedWatson/react-select/issues/568) for details and progress). The new code has been merged into `master`, and `react-select@1.0.0-beta` has been published to npm and bower.
+I've nearly completed a major rewrite of this component (see issue [#568](https://github.com/JedWatson/react-select/issues/568) for details and progress). The new code has been merged into `master`, and `react-select@1.0.0-rc` has been published to npm and bower.
 
-1.0.0 has some breaking changes. The documentation below still needs to be updated for the new API; notes on the changes can be found in [CHANGES.md](https://github.com/JedWatson/react-select/blob/master/CHANGES.md) and will be finalised into [HISTORY.md](https://github.com/JedWatson/react-select/blob/master/HISTORY.md) soon.
-
-Our tests need some major updates to work with the new API (see [#571](https://github.com/JedWatson/react-select/issues/571)) and are causing the build to fail, but the component is stable and robust in actual usage.
+1.0.0 has some breaking changes. The documentation is still being updated for the new API; notes on the changes can be found in [CHANGES.md](https://github.com/JedWatson/react-select/blob/master/CHANGES.md) and will be finalised into [HISTORY.md](https://github.com/JedWatson/react-select/blob/master/HISTORY.md) soon.
 
 Testing, feedback and PRs for the new version are appreciated.
 
@@ -200,6 +198,49 @@ var isLoadingExternally = true;
 />
 ```
 
+### User-created tags
+
+The `Creatable` component enables users to create new tags within react-select.
+It decorates a `Select` and so it supports all of the default properties (eg single/multi mode, filtering, etc) in addition to a couple of custom ones (shown below).
+The easiest way to use it is like so:
+
+```js
+import { Creatable } from 'react-select';
+
+function render (selectProps) {
+  return <Creatable {...selectProps} />;
+};
+```
+
+##### Creatable properties
+
+Property | Type | Description
+:---|:---|:---
+`children` | function | Child function responsible for creating the inner Select component. This component can be used to compose HOCs (eg Creatable and Async). Expected signature: `(props: Object): PropTypes.element` |
+`isOptionUnique` | function | Searches for any matching option within the set of options. This function prevents duplicate options from being created. By default this is a basic, case-sensitive comparison of label and value. Expected signature: `({ option: Object, options: Array, labelKey: string, valueKey: string }): boolean` |
+`isValidNewOption` | function | Determines if the current input text represents a valid option. By default any non-empty string will be considered valid. Expected signature: `({ label: string }): boolean` |
+`newOptionCreator` | function | Factory to create new option. Expected signature: `({ label: string, labelKey: string, valueKey: string }): Object` |
+`shouldKeyDownEventCreateNewOption` | function | Decides if a keyDown event (eg its `keyCode`) should result in the creation of a new option. ENTER, TAB and comma keys create new options by default. Expected signature: `({ keyCode: number }): boolean` |
+`promptTextCreator` | function | Factory for overriding default option creator prompt label. By default it will read 'Create option "{label}"'. Expected signature: `(label: String): String` |
+
+### Combining Async and Creatable
+
+Use the `AsyncCreatable` HOC if you want both _async_ and _creatable_ functionality.
+It ties `Async` and `Creatable` components together and supports a union of their properties (listed above).
+Use it as follows:
+
+```jsx
+import React from 'react';
+import { AsyncCreatable } from 'react-select';
+
+function render (props) {
+  // props can be a mix of Async, Creatable, and Select properties
+  return (
+    <AsyncCreatable {...props} />
+  );
+}
+```
+
 ### Filtering options
 
 You can control how options are filtered with the following properties:
@@ -220,7 +261,13 @@ You can also completely replace the method used to filter either a single option
 
 For multi-select inputs, when providing a custom `filterOptions` method, remember to exclude current values from the returned array of options.
 
-#### Effeciently rendering large lists with windowing
+#### Filtering large lists
+
+The default `filterOptions` method scans the options array for matches each time the filter text changes.
+This works well but can get slow as the options array grows to several hundred objects.
+For larger options lists a custom filter function like [`react-select-fast-filter-options`](https://github.com/bvaughn/react-select-fast-filter-options) will produce better results.
+
+### Effeciently rendering large lists with windowing
 
 The `menuRenderer` property can be used to override the default drop-down list of options.
 This should be done when the list is large (hundreds or thousands of items) for faster rendering.
@@ -237,6 +284,9 @@ The custom `menuRenderer` property accepts the following named parameters:
 | focusedOption | `Object` | The currently focused option; should be visible in the menu by default. |
 | focusOption | `Function` | Callback to focus a new option; receives the option as a parameter. |
 | labelKey | `String` | Option labels are accessible with this string key. |
+| optionClassName | `String` | The className that gets used for options |
+| optionComponent | `ReactClass` | The react component that gets used for rendering an option |
+| optionRenderer | `Function` | The function that gets used to render the content of an option |
 | options | `Array<Object>` | Ordered array of options to render. |
 | selectValue | `Function` | Callback to select a new option; receives the option as a parameter. |
 | valueArray | `Array<Object>` | Array of currently selected options. |
@@ -257,18 +307,43 @@ function cleanInput(inputValue) {
 />
 ```
 
+### Overriding default key-down behavior with onInputKeyDown
+
+`Select` listens to `keyDown` events to select items, navigate drop-down list via arrow keys, etc.
+You can extend or override this behavior by providing a `onInputKeyDown` callback.
+
+```js
+function onInputKeyDown(event) {
+	switch (event.keyCode) {
+		case 9:   // TAB
+			// Extend default TAB behavior by doing something here
+			break;
+		case 13: // ENTER
+			// Override default ENTER behavior by doing stuff here and then preventing default
+			event.preventDefault();
+			break;
+	}
+}
+
+<Select
+	{...otherProps}
+	onInputKeyDown={onInputKeyDown}
+/>
+```
+
 ### Further options
 
 
 	Property	|	Type		|	Default		|	Description
 :-----------------------|:--------------|:--------------|:--------------------------------
 	addLabelText	|	string	|	'Add "{label}"?'	|	text to display when `allowCreate` is true
-	allowCreate	|	bool	|	false		|	allow new options to be created in multi mode (displays an "Add \<option> ?" item when a value not already in the `options` array is entered) [NOTE: not available in 1.0.0-beta]
+  arrowRenderer | func | undefined | Renders a custom drop-down arrow to be shown in the right-hand side of the select: `arrowRenderer({ onMouseDown })`
 	autoBlur	|	bool | false | Blurs the input element after a selection has been made. Handy for lowering the keyboard on mobile devices
 	autofocus       |       bool    |      undefined        |  autofocus the component on mount
 	autoload 	|	bool	|	true		|	whether to auto-load the default async options set
 	autosize  | bool | true  | If enabled, the input will expand as the length of its value increases
 	backspaceRemoves 	|	bool	|	true	|	whether pressing backspace removes the last item when there is no input value
+	backspaceToRemoveMessage	|	string	|	'Press backspace to remove {last label}'	|	prompt shown in input when at least one option in a multiselect is shown, set to '' to clear
 	cache	|	bool	|	true	|	enables the options cache for `asyncOptions` (default: `true`)
 	className 	|	string	|	undefined	|	className for the outer element
 	clearable 	|	bool	|	true		|	should it be possible to reset value
@@ -291,15 +366,15 @@ function cleanInput(inputValue) {
 	menuRenderer | func | undefined | Renders a custom menu with options; accepts the following named parameters: `menuRenderer({ focusedOption, focusOption, options, selectValue, valueArray })`
 	multi 		|	bool	|	undefined	|	multi-value input
 	name 		|	string	|	undefined	|	field name, for hidden `<input />` tag
-	newOptionCreator	|	func	|	undefined	|	factory to create new options when `allowCreate` is true [NOTE: not available in 1.0.0-beta]
 	noResultsText 	|	string	|	'No results found'	|	placeholder displayed when there are no matching search results or a falsy value to hide it
 	onBlur 		|	func	|	undefined	|	onBlur handler: `function(event) {}`
 	onBlurResetsInput	|	bool	|	true	|	whether to clear input on blur or not
 	onChange 	|	func	|	undefined	|	onChange handler: `function(newValue) {}`
 	onClose		|	func	|	undefined	|	handler for when the menu closes: `function () {}`
-	onCloseResetInput | bool  | true  | whether to clear input when closing the menu through the arrow
+	onCloseResetsInput | bool  | true  | whether to clear input when closing the menu through the arrow
 	onFocus 	|	func	|	undefined	|	onFocus handler: `function(event) {}`
 	onInputChange	|	func	|	undefined	|	onInputChange handler: `function(inputValue) {}`
+	onInputKeyDown	|	func	|	undefined	|	input keyDown handler; call `event.preventDefault()` to override default `Select` behavior: `function(event) {}`
 	onOpen		|	func	|	undefined	|	handler for when the menu opens: `function () {}`
 	onValueClick	|	func	|	undefined	|	onClick handler for value labels: `function (value, event) {}`
 	openOnFocus | bool | false | open the options menu when the input gets focus (requires searchable = true)
@@ -308,7 +383,6 @@ function cleanInput(inputValue) {
 	placeholder 	|	string\|node	|	'Select ...'	|	field placeholder, displayed when there's no value
 	scrollMenuIntoView |	bool	|	true		|	whether the viewport will shift to display the entire menu when engaged
 	searchable 	|	bool	|	true		|	whether to enable searching feature or not
-	searchingText	|	string	|	'Searching...'	|	message to display whilst options are loading via asyncOptions, or when `isLoading` is true
 	searchPromptText |	string\|node	|	'Type to search'	|	label to prompt for search input
 	tabSelectsValue	|	bool	|	true	|	whether to select the currently focused value when the `[tab]` key is pressed
 	value 		|	any	|	undefined	|	initial field value

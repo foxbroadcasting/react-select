@@ -10,8 +10,8 @@ const GithubUsers = React.createClass({
 	},
 	getInitialState () {
 		return {
-			multi: true,
-			reorder: true,
+			backspaceRemoves: true,
+			multi: true
 		};
 	},
 	onChange (value) {
@@ -32,6 +32,10 @@ const GithubUsers = React.createClass({
 		});
 	},
 	getUsers (input) {
+		if (!input) {
+			return Promise.resolve({ options: [] });
+		}
+
 		return fetch(`https://api.github.com/search/users?q=${input}`)
       .then((response) => response.json())
       .then((json) => {
@@ -41,16 +45,25 @@ const GithubUsers = React.createClass({
 	gotoUser (value, event) {
 		window.open(value.html_url);
 	},
-	toggleReorder (e) {
+	toggleBackspaceRemoves () {
 		this.setState({
-			reorder: e.target.checked
+			backspaceRemoves: !this.state.backspaceRemoves
+		});
+	},
+	toggleCreatable () {
+		this.setState({
+			creatable: !this.state.creatable
 		});
 	},
 	render () {
+		const AsyncComponent = this.state.creatable
+			? Select.AsyncCreatable
+			: Select.Async;
+
 		return (
 			<div className="section">
 				<h3 className="section-heading">{this.props.label}</h3>
-				<Select.Async multi={this.state.multi} value={this.state.value} onChange={this.onChange} valueKey="id" labelKey="login" loadOptions={this.getUsers} minimumInput={1} backspaceRemoves={false} reorder={this.state.reorder} />
+				<AsyncComponent multi={this.state.multi} value={this.state.value} onChange={this.onChange} onValueClick={this.gotoUser} valueKey="id" labelKey="login" loadOptions={this.getUsers} backspaceRemoves={this.state.backspaceRemoves} />
 				<div className="checkbox-list">
 					<label className="checkbox">
 						<input type="radio" className="checkbox-control" checked={this.state.multi} onChange={this.switchToMulti}/>
@@ -60,9 +73,15 @@ const GithubUsers = React.createClass({
 						<input type="radio" className="checkbox-control" checked={!this.state.multi} onChange={this.switchToSingle}/>
 						<span className="checkbox-label">Single Value</span>
 					</label>
+				</div>
+				<div className="checkbox-list">
 					<label className="checkbox">
-						<input type="checkbox" className="checkbox-control" checked={this.state.reorder} onChange={this.toggleReorder} />
-						<span className="checkbox-label">Drag-and-drop</span>
+					   <input type="checkbox" className="checkbox-control" checked={this.state.creatable} onChange={this.toggleCreatable} />
+					   <span className="checkbox-label">Creatable?</span>
+					</label>
+					<label className="checkbox">
+					   <input type="checkbox" className="checkbox-control" checked={this.state.backspaceRemoves} onChange={this.toggleBackspaceRemoves} />
+					   <span className="checkbox-label">Backspace Removes?</span>
 					</label>
 				</div>
 				<div className="hint">This example uses fetch.js for showing Async options with Promises</div>
