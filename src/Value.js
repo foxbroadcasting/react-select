@@ -11,6 +11,7 @@ const Value = React.createClass({
 		id: React.PropTypes.string,                   // Unique id for the value - used for aria
 		onClick: React.PropTypes.func,                // method to handle click on value label
 		onRemove: React.PropTypes.func,               // method to handle removal of the value
+		reorder: React.PropTypes.bool,                // enable drag-and-drop
 		value: React.PropTypes.object.isRequired,     // the option object for this value
 	},
 
@@ -23,7 +24,7 @@ const Value = React.createClass({
 			this.props.onClick(this.props.value, event);
 			return;
 		}
-		if (this.props.value.href) {
+		if (this.props.value.href  || this.props.reorder) {
 			event.stopPropagation();
 		}
 	},
@@ -74,7 +75,7 @@ const Value = React.createClass({
 				{this.props.children}
 			</a>
 		) : (
-			<span className={className} role="option" aria-selected="true" id={this.props.id}>
+			<span className={className} role="option" aria-selected="true" id={this.props.id} onMouseDown={this.handleMouseDown} onTouchEnd={this.handleMouseDown}>
 				{this.props.children}
 			</span>
 		);

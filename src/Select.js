@@ -19,6 +19,11 @@ import Creatable from './Creatable';
 import Option from './Option';
 import Value from './Value';
 
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
+import DragDropContainer from './dnd/DragDropContainer';
+import DragDropItem from './dnd/DragDropItem';
+
 function stringifyValue (value) {
 	const valueType = typeof value;
 	if (valueType === 'string') {
@@ -98,6 +103,7 @@ const Select = React.createClass({
 		options: React.PropTypes.array,             // array of options
 		pageSize: React.PropTypes.number,           // number of entries to page when using page up/down keys
 		placeholder: stringOrNode,                  // field placeholder, displayed when there's no value
+		reorder: React.PropTypes.bool,              // enable drag-and-drop
 		required: React.PropTypes.bool,             // applies HTML5 required attribute when needed
 		resetValue: React.PropTypes.any,            // value to use when you clear the control
 		scrollMenuIntoView: React.PropTypes.bool,   // boolean to enable the viewport to shift so that the full menu fully visible when engaged
@@ -765,6 +771,14 @@ const Select = React.createClass({
 		}
 	},
 
+	reorderValueArray (srcIndex, targetIndex) {
+		if(srcIndex === targetIndex) return;
+		let valueArray = this.getValueArray(this.props.value);
+		const spliced = valueArray.splice(srcIndex,  1);
+		valueArray.splice(targetIndex, 0, ...spliced);
+		this.setValue(valueArray);
+	},
+
 	renderLoading () {
 		if (!this.props.isLoading) return;
 		return (
@@ -774,32 +788,69 @@ const Select = React.createClass({
 		);
 	},
 
+	renderMultiValueComponent (value, index, reorder) {
+		const renderLabel = this.props.valueRenderer || this.getOptionLabel;
+		const ValueComponent = this.props.valueComponent;
+		const onClick = this.props.onValueClick ? this.handleValueClick : null;
+		const id = `${this._instancePrefix}-value-${index}`;
+		const key = `value-${index}-${value[this.props.valueKey]}`;
+		return (
+			<ValueComponent
+				id={id}
+				instancePrefix={this._instancePrefix}
+				disabled={this.props.disabled || value.clearableValue === false}
+				key={key}
+				onClick={onClick}
+				onRemove={this.removeValue}
+				value={value}
+				reorder={reorder}
+				>
+				{renderLabel(value, index)}
+				<span className="Select-aria-only">&nbsp;</span>
+			</ValueComponent>
+		);
+	},
+
 	renderValue (valueArray, isOpen) {
-		let renderLabel = this.props.valueRenderer || this.getOptionLabel;
-		let ValueComponent = this.props.valueComponent;
 		if (!valueArray.length) {
 			return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
 		}
-		let onClick = this.props.onValueClick ? this.handleValueClick : null;
 		if (this.props.multi) {
-			return valueArray.map((value, i) => {
-				return (
-					<ValueComponent
-						id={this._instancePrefix + '-value-' + i}
-						instancePrefix={this._instancePrefix}
-						disabled={this.props.disabled || value.clearableValue === false}
-						key={`value-${i}-${value[this.props.valueKey]}`}
-						onClick={onClick}
-						onRemove={this.removeValue}
-						value={value}
-					>
-						{renderLabel(value, i)}
-						<span className="Select-aria-only">&nbsp;</span>
-					</ValueComponent>
-				);
-			});
+			if (this.props.reorder && !this.props.disabled) {
+				return valueArray.map((value, i) => {
+					const reorder = true;
+					return (
+						<DragDropContainer
+							key={i}
+							index={i}
+							contextId={this._instancePrefix}
+							className="Select-drag-container"
+							handleSorting={this.reorderValueArray}
+							>
+							<DragDropItem
+								index={i}
+								contextId={this._instancePrefix}
+								>
+								{this.renderMultiValueComponent(value, i, reorder)}
+							</DragDropItem>
+						</DragDropContainer>
+					);
+				});
+			}
+			else {
+				return valueArray.map((value, i) => {
+					const reorder = false;
+					return this.renderMultiValueComponent(value, i, reorder);
+				});
+			}
 		} else if (!this.state.inputValue) {
-			if (isOpen) onClick = null;
+			let renderLabel = this.props.valueRenderer || this.getOptionLabel;
+			let ValueComponent = this.props.valueComponent;
+			let onClick = this.props.onValueClick ? this.handleValueClick : null;
+			if (isOpen) {
+				onClick = null;
+			}
+			const id = this._instancePrefix + '-value-item';
 			return (
 				<ValueComponent
 					id={this._instancePrefix + '-value-item'}
@@ -1100,4 +1151,9 @@ const Select = React.createClass({
 
 });
 
-export default Select;
+const SelectComposite = DragDropContext(HTML5Backend)(Select);
+SelectComposite.Async = Async;
+SelectComposite.AsyncCreatable = AsyncCreatable;
+SelectComposite.Creatable = Creatable;
+
+export default SelectComposite;

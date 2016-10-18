@@ -33,6 +33,49 @@
 		vertical-align: top;
 	}
 
+	.Select-drag-container {
+		display:inline-block;
+
+		.Select-value {
+			display: block;
+
+			.Select-value-label {
+				cursor: move; /* fallback if grab cursor is unsupported */
+				cursor: grab;
+				cursor: -moz-grab;
+				cursor: -webkit-grab;
+
+				&:active {
+					cursor: grabbing;
+					cursor: -moz-grabbing;
+					cursor: -webkit-grabbing;
+				}
+			}
+		}
+	}
+
+	.Select-drag-item {
+		.Select-value {
+			border: 1px solid @select-item-border-color-cantdrop;
+		}
+	}
+
+	.Select-drag-drop-item {
+		padding-left:5px;
+		transition: padding-left .2s;
+		&:before {
+			content:'';
+			height:100%;
+			width:1px;
+			background:$select-item-bg;
+
+		}
+
+		.Select-value {
+			border: 1px solid $select-item-border-color-candrop;
+		}
+	}
+
 	// common
 	.Select-value-icon,
 	.Select-value-label {

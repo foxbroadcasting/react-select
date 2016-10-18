@@ -198,12 +198,13 @@ const Creatable = React.createClass({
 			onInputChange: this.onInputChange,
 			onInputKeyDown: this.onInputKeyDown,
 			ref: (ref) => {
-				this.select = ref;
-
-				// These values may be needed in between Select mounts (when this.select is null)
 				if (ref) {
-					this.labelKey = ref.props.labelKey;
-					this.valueKey = ref.props.valueKey;
+					this.select = ref.refs.child;
+
+					// These values may be needed in between Select mounts (when this.select is null)
+					this.labelKey = ref.refs.child.props.labelKey;
+					this.valueKey = ref.refs.child.props.valueKey;
+
 				}
 			}
 		};
