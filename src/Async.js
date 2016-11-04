@@ -14,6 +14,7 @@ const propTypes = {
 	]),
 	loadOptions: React.PropTypes.func.isRequired,    // callback to load options asynchronously; (inputValue: string, callback: Function): ?Promise
 	options: PropTypes.array.isRequired,             // array of options
+	onInputChange: PropTypes.func,                   // onInputChange handler: function (inputValue) {}
 	placeholder: React.PropTypes.oneOfType([         // field placeholder, displayed when there's no value (shared with Select)
 		React.PropTypes.string,
 		React.PropTypes.node

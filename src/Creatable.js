@@ -34,6 +34,9 @@ const Creatable = React.createClass({
 		// input keyDown handler: function (event) {}
 		onInputKeyDown: React.PropTypes.func,
 
+		// onInputChange handler: function (inputValue) {}
+		onInputChange: React.PropTypes.func,
+
 		// See Select.propTypes.options
 		options: React.PropTypes.array,
 
@@ -155,6 +158,10 @@ const Creatable = React.createClass({
 	},
 
 	onInputChange (input) {
+		const { onInputChange } = this.props;
+		if (onInputChange) {
+			onInputChange(input);
+		}
 		// This value may be needed in between Select mounts (when this.select is null)
 		this.inputValue = input;
 	},

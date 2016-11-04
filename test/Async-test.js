@@ -431,7 +431,7 @@ describe('Async', () => {
 				onInputChange,
 			});
 			typeSearchText('a');
-			return expect(onInputChange, 'was called times', 1);
+			expect(onInputChange, 'was called times', 1);
 		});
 	});
 });
