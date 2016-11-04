@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/JedWatson/react-select.svg?branch=master)](https://travis-ci.org/JedWatson/react-select)
 [![Coverage Status](https://coveralls.io/repos/JedWatson/react-select/badge.svg?branch=master&service=github)](https://coveralls.io/github/JedWatson/react-select?branch=master)
 [![Supported by Thinkmill](https://thinkmill.github.io/badge/heart.svg)](http://thinkmill.com.au/?utm_source=github&utm_medium=badge&utm_campaign=react-select)
+[![CDNJS](https://img.shields.io/cdnjs/v/react-select.svg)](https://cdnjs.com/libraries/react-select)
 
 React-Select
 ============
@@ -102,7 +103,7 @@ You can enable multi-value selection by setting `multi={true}`. In this mode:
 * The values of the selected items are joined using the `delimiter` prop to create the input value when `joinValues` is true
 * A simple value, if provided, will be split using the `delimiter` prop
 * The `onChange` event provides an array of selected options _or_ a comma-separated string of values (eg `"1,2,3"`) if `simpleValue` is true
-* By default, only options in the `options` array can be selected. Setting `allowCreate` to true allows new options to be created if they do not already exist. *NOTE:* `allowCreate` is not implemented in `1.0.0-beta`, if you need this option please stay on `0.9.x`.
+* By default, only options in the `options` array can be selected. Use the `Creatable` Component (which wraps `Select`) to allow new options to be created if they do not already exist. Hitting comma (','), ENTER or TAB will add a new option. Versions `0.9.x` and below provided a boolean attribute on the `Select` Component (`allowCreate`) to achieve the same functionality. It is no longer available starting with version `1.0.0`.
 * By default, selected options can be cleared. To disable the possibility of clearing a particular option, add `clearableValue: false` to that option:
 ```javascript
 var options = [
@@ -350,6 +351,7 @@ function onInputKeyDown(event) {
 	clearAllText 	|	string	|	'Clear all'	|	title for the "clear" control when `multi` is true
 	clearValueText 	|	string	|	'Clear value'	|	title for the "clear" control
 	resetValue 	|	any	|	null	|	value to use when you clear the control
+	deleteRemoves 	|	bool	|	true	|	whether pressing delete key removes the last item when there is no input value
 	delimiter 	|	string	|	','		|	delimiter to use to join multiple values
 	disabled 	|	bool	|	false		|	whether the Select is disabled or not
 	filterOption 	|	func	|	undefined	|	method to filter a single option: `function(option, filterString)`
