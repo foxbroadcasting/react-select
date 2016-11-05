@@ -37,10 +37,14 @@
 	}
 
 	.Select-drag-container {
-		display:inline-block;
+		display: inline-block;
+		margin-left: @select-item-gutter;
+		margin-top: @select-item-gutter;
 
 		.Select-value {
 			display: block;
+			margin-left: 0;
+			margin-top: 0;
 
 			.Select-value-label {
 				cursor: move; /* fallback if grab cursor is unsupported */
@@ -58,28 +62,9 @@
 	}
 
 	// Sorting
-	.Select-drag-item {
-		.Select-value {
-			border: 1px solid @select-item-border-color-cantdrop;  /* Fallback color for IE 8 */
-			border: 1px solid @select-item-border-color-cantdrop;
-		}
-	}
-
 	.Select-drag-drop-item {
-		padding-left:5px;
-		transition: padding-left .2s;
-		&:before {
-			content:'';
-			height:100%;
-			width:1px;
-			background:@select-primary-color;
-
-		}
-
-		.Select-value {
-			border: 1px solid @select-item-border-color-candrop;  /* Fallback color for IE 8 */
-			border: 1px solid @select-item-border-color-candrop;
-		}
+		padding-left: 50px;
+		transition: padding-left .4s;
 	}
 
 	// common

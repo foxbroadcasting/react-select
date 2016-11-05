@@ -307,6 +307,32 @@
   margin-top: 5px;
   vertical-align: top;
 }
+.Select--multi .Select-drag-container {
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.Select--multi .Select-drag-container .Select-value {
+  display: block;
+  margin-left: 0;
+  margin-top: 0;
+}
+.Select--multi .Select-drag-container .Select-value .Select-value-label {
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+.Select--multi .Select-drag-container .Select-value .Select-value-label:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+.Select--multi .Select-drag-drop-item {
+  padding-left: 50px;
+  transition: padding-left 0.4s;
+}
 .Select--multi .Select-value-icon,
 .Select--multi .Select-value-label {
   display: inline-block;
