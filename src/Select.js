@@ -118,6 +118,7 @@ const Select = React.createClass({
 		valueKey: React.PropTypes.string,           // path of the label value in option objects
 		valueRenderer: React.PropTypes.func,        // valueRenderer: function (option) {}
 		wrapperStyle: React.PropTypes.object,       // optional style to apply to the component wrapper
+		objectValueMatchingKey: React.PropTypes.string,
 	},
 
 	statics: { Async, AsyncCreatable, Creatable },
@@ -589,9 +590,24 @@ const Select = React.createClass({
 	 */
 	expandValue (value, props) {
 		const valueType = typeof value;
-		if (valueType !== 'string' && valueType !== 'number' && valueType !== 'boolean') return value;
+		const objectValueMatchingKey = this.props.objectValueMatchingKey;
+		if (valueType !== 'string' &&
+			valueType !== 'number' &&
+			valueType !== 'boolean' &&
+			!objectValueMatchingKey) return value;
+
 		let { options, valueKey } = props;
+		if (valueType === 'object' && (!options || options.length === 0)) return value;
 		if (!options) return;
+
+		if (valueType === 'object' && objectValueMatchingKey) {
+			for (var k = 0; k < options.length; k++) {
+				if (options[k][valueKey][objectValueMatchingKey] === value[valueKey][objectValueMatchingKey]) {
+					return options[k];
+				}
+			}
+		}
+
 		for (var i = 0; i < options.length; i++) {
 			if (options[i][valueKey] === value) return options[i];
 		}
