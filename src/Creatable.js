@@ -173,7 +173,15 @@ class CreatableSelect extends React.Component {
 			menuRenderer: this.menuRenderer,
 			onInputChange: this.onInputChange,
 			onInputKeyDown: this.onInputKeyDown,
-			ref: (ref) => (this.select = ref),
+			ref: (ref) => {
+				if (ref) {
+					const select = ref.child;
+
+					this.select = select;
+					this.labelKey = select.props.labelKey;
+					this.valueKey = select.props.valueKey;
+				}
+			},
 		};
 
 		return children(props);
