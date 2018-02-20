@@ -901,6 +901,25 @@ class Select extends React.Component {
 	filterOptions (excludeOptions) {
 		var filterValue = this.state.inputValue;
 		var options = this.props.options || [];
+
+		var extraOptions = this.props.extraOptions || [];
+		var labelKey = this.props.labelKey;
+		if(extraOptions.length) {
+			const filterValueLower = filterValue.toLowerCase();
+			const optionsSet = new Set();
+			options.forEach((value) => {
+				if(typeof value === 'object') {
+					optionsSet.add(`${value[labelKey]}`.toLowerCase());
+				}
+			});
+			const filteredExtraOptions = extraOptions.filter((value) => {
+				if(typeof value !== 'object') return false;
+				const label = `${value[labelKey]}`.toLowerCase();
+				return !optionsSet.has(label) && label.indexOf(filterValueLower) >= 0;
+			});
+			options = options.concat(filteredExtraOptions);
+		}
+
 		if (this.props.filterOptions) {
 			// Maintain backwards compatibility with boolean attribute
 			const filterOptions = typeof this.props.filterOptions === 'function'
@@ -1104,8 +1123,8 @@ Select.propTypes = {
 	addLabelText: PropTypes.string,       // placeholder displayed when you want to add a label on a multi-value input
 	arrowRenderer: PropTypes.func,        // Create drop-down caret element
 	autoBlur: PropTypes.bool,             // automatically blur the component when an option is selected
-	autofocus: PropTypes.bool,            // deprecated; use autoFocus instead
 	autoFocus: PropTypes.bool,            // autofocus the component on mount
+	autofocus: PropTypes.bool,            // deprecated; use autoFocus instead
 	autosize: PropTypes.bool,             // whether to enable autosizing or not
 	backspaceRemoves: PropTypes.bool,     // whether backspace removes an item if there is no text input
 	backspaceToRemoveMessage: PropTypes.string,  // Message to use for screenreaders to press backspace to remove the current item - {label} is replaced with the item label
@@ -1119,6 +1138,7 @@ Select.propTypes = {
 	delimiter: PropTypes.string,          // delimiter to use to join multiple values for the hidden field value
 	disabled: PropTypes.bool,             // whether the Select is disabled or not
 	escapeClearsValue: PropTypes.bool,    // whether escape clears the value when the menu is closed
+	extraOptions: PropTypes.array,        // an optional array of options to display in the dropdown according to the filter
 	filterOption: PropTypes.func,         // method to filter a single option (option, filterString)
 	filterOptions: PropTypes.any,         // boolean to enable default filtering or function to filter the options array ([options], filterString, [values])
 	ignoreAccents: PropTypes.bool,        // whether to strip diacritics when filtering
