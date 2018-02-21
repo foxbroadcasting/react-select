@@ -299,7 +299,7 @@ class Select extends React.Component {
 	}
 
 	closeMenu () {
-		if(this.props.onCloseResetsInput) {
+		if (this.props.onCloseResetsInput) {
 			this.setState({
 				isOpen: false,
 				isPseudoFocused: this.state.isFocused && !this.props.multi,
@@ -598,7 +598,7 @@ class Select extends React.Component {
 	}
 
 	reorderValueArray (srcIndex, targetIndex) {
-		if(srcIndex === targetIndex) return;
+		if (srcIndex === targetIndex) return;
 		let valueArray = this.getValueArray(this.props.value);
 		const spliced = valueArray.splice(srcIndex,  1);
 		valueArray.splice(targetIndex, 0, ...spliced);
@@ -904,16 +904,16 @@ class Select extends React.Component {
 
 		var extraOptions = this.props.extraOptions || [];
 		var labelKey = this.props.labelKey;
-		if(extraOptions.length) {
+		if (extraOptions.length) {
 			const filterValueLower = filterValue.toLowerCase();
 			const optionsSet = new Set();
 			options.forEach((value) => {
-				if(typeof value === 'object') {
+				if (typeof value === 'object') {
 					optionsSet.add(`${value[labelKey]}`.toLowerCase());
 				}
 			});
 			const filteredExtraOptions = extraOptions.filter((value) => {
-				if(typeof value !== 'object') return false;
+				if (typeof value !== 'object') return false;
 				const label = `${value[labelKey]}`.toLowerCase();
 				return !optionsSet.has(label) && label.indexOf(filterValueLower) >= 0;
 			});

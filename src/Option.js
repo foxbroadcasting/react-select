@@ -47,7 +47,7 @@ class Option extends React.Component {
 	handleTouchEnd(event){
 		// Check if the view is being dragged, In this case
 		// we don't want to fire the click event (because the user only wants to scroll)
-		if(this.dragging) return;
+		if (this.dragging) return;
 
 		this.handleMouseDown(event);
 	}
