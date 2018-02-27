@@ -917,7 +917,7 @@ class Select extends React.Component {
 				const label = `${value[labelKey]}`.toLowerCase();
 				return !optionsSet.has(label) && label.indexOf(filterValueLower) >= 0;
 			});
-			options = options.concat(filteredExtraOptions);
+			options = [...filteredExtraOptions, ...options];
 		}
 
 		if (this.props.filterOptions) {

@@ -1723,7 +1723,7 @@ var Select$1 = function (_React$Component) {
 					var label = ('' + value[labelKey]).toLowerCase();
 					return !optionsSet.has(label) && label.indexOf(filterValueLower) >= 0;
 				});
-				options = options.concat(filteredExtraOptions);
+				options = [].concat(toConsumableArray(filteredExtraOptions), toConsumableArray(options));
 			}
 
 			if (this.props.filterOptions) {
