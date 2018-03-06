@@ -54,7 +54,7 @@ const target = {
 	drop(props, monitor , component) {
 		const { handleSorting } = props;
 		const { state } = component;
-		if(typeof handleSorting === 'function') {
+		if (typeof handleSorting === 'function') {
 			handleSorting(state.dragIndex, state.hoverIndex);
 		}
 	}

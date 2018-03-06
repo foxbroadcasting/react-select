@@ -37,7 +37,7 @@ class Value extends React.Component {
 	handleTouchEndRemove (event){
 		// Check if the view is being dragged, In this case
 		// we don't want to fire the click event (because the user only wants to scroll)
-		if(this.dragging) return;
+		if (this.dragging) return;
 
 		// Fire the mouse events
 		this.onRemove(event);
