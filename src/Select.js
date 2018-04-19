@@ -871,7 +871,8 @@ class Select extends React.Component {
     const clear = this.props.clearAllText;
     return (
       <div className="Select-multi-clear-wrapper">
-        <span className="Select-multi-clear-zone" title={this.props.clearAllText}
+        <span className="Select-multi-clear-zone"
+          title={this.props.clearAllText}
           aria-label={this.props.clearAllText}
           onMouseDown={this.clearValue}
           onTouchStart={this.handleTouchStart}
