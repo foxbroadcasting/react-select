@@ -1678,7 +1678,8 @@ var Select$1 = function (_React$Component) {
 				{ className: 'Select-multi-clear-wrapper' },
 				React.createElement(
 					'span',
-					{ className: 'Select-multi-clear-zone', title: this.props.clearAllText,
+					{ className: 'Select-multi-clear-zone',
+						title: this.props.clearAllText,
 						'aria-label': this.props.clearAllText,
 						onMouseDown: this.clearValue,
 						onTouchStart: this.handleTouchStart,
