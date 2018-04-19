@@ -1669,6 +1669,27 @@ var Select$1 = function (_React$Component) {
 			);
 		}
 	}, {
+		key: 'renderBottomClear',
+		value: function renderBottomClear() {
+			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || this.props.isLoading) return;
+			var clear = this.props.clearAllText;
+			return React.createElement(
+				'div',
+				{ className: 'Select-multi-clear-wrapper' },
+				React.createElement(
+					'span',
+					{ className: 'Select-multi-clear-zone', title: this.props.clearAllText,
+						'aria-label': this.props.clearAllText,
+						onMouseDown: this.clearValue,
+						onTouchStart: this.handleTouchStart,
+						onTouchMove: this.handleTouchMove,
+						onTouchEnd: this.handleTouchEndClearValue
+					},
+					clear
+				)
+			);
+		}
+	}, {
 		key: 'renderClear',
 		value: function renderClear() {
 			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || this.props.isLoading) return;
@@ -1930,9 +1951,9 @@ var Select$1 = function (_React$Component) {
 					),
 					removeMessage,
 					this.renderLoading(),
-					this.renderClear(),
 					this.renderArrow()
 				),
+				this.props.multi && !isOpen && this.renderBottomClear(),
 				isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null
 			);
 		}
@@ -2027,7 +2048,7 @@ Select$1.defaultProps = {
 	backspaceRemoves: true,
 	backspaceToRemoveMessage: 'Press backspace to remove {label}',
 	clearable: true,
-	clearAllText: 'Clear all',
+	clearAllText: 'Clear All',
 	clearRenderer: clearRenderer,
 	clearValueText: 'Clear value',
 	closeOnSelect: true,
