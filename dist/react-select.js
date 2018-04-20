@@ -1684,8 +1684,8 @@ var Select$1 = function (_React$Component) {
 				React__default.createElement(
 					'span',
 					{ className: 'Select-multi-clear-zone',
-						title: this.props.clearAllText,
-						'aria-label': this.props.clearAllText,
+						title: clear,
+						'aria-label': clear,
 						onMouseDown: this.clearValue,
 						onTouchStart: this.handleTouchStart,
 						onTouchMove: this.handleTouchMove,
@@ -1957,6 +1957,7 @@ var Select$1 = function (_React$Component) {
 					),
 					removeMessage,
 					this.renderLoading(),
+					!this.props.multi && this.renderClear(),
 					this.renderArrow()
 				),
 				this.props.multi && !isOpen && this.renderBottomClear(),

@@ -872,8 +872,8 @@ class Select extends React.Component {
     return (
       <div className="Select-multi-clear-wrapper">
         <span className="Select-multi-clear-zone"
-          title={this.props.clearAllText}
-          aria-label={this.props.clearAllText}
+          title={clear}
+          aria-label={clear}
           onMouseDown={this.clearValue}
           onTouchStart={this.handleTouchStart}
           onTouchMove={this.handleTouchMove}
@@ -1126,6 +1126,7 @@ class Select extends React.Component {
 					</span>
 					{removeMessage}
 					{this.renderLoading()}
+				  {!this.props.multi && this.renderClear()}
 					{this.renderArrow()}
 				</div>
 				{this.props.multi && (!isOpen && this.renderBottomClear())}
