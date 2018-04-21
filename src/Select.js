@@ -1126,7 +1126,7 @@ class Select extends React.Component {
 					</span>
 					{removeMessage}
 					{this.renderLoading()}
-				  {!this.props.multi && this.renderClear()}
+					{!this.props.multi && this.renderClear()}
 					{this.renderArrow()}
 				</div>
 				{this.props.multi && (!isOpen && this.renderBottomClear())}
