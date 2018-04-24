@@ -225,6 +225,13 @@
 		color: @select-clear-hover-color;
 	}
 }
+.Select-multi-clear-zone {
+	.animation( Select-animation-fadeIn 200ms );
+	color: @select-clear-color;
+	cursor: pointer;
+	padding-top: @select-padding-vertical;
+	width: @select-multi-clear-width;
+}
 .Select-clear {
 	display: inline-block;
 	font-size: @select-clear-size;
@@ -232,6 +239,10 @@
 }
 .Select--multi .Select-clear-zone {
 	width: @select-clear-width;
+}
+.Select--multi .Select-multi-clear-wrapper{
+	display: flex;
+	flex-direction: row-reverse;
 }
 
 

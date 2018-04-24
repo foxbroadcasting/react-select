@@ -866,6 +866,25 @@ class Select extends React.Component {
 		);
 	}
 
+  renderBottomClear() {
+    if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || this.props.isLoading) return;
+    const clear = this.props.clearAllText;
+    return (
+      <div className="Select-multi-clear-wrapper">
+        <span className="Select-multi-clear-zone"
+          title={clear}
+          aria-label={clear}
+          onMouseDown={this.clearValue}
+          onTouchStart={this.handleTouchStart}
+          onTouchMove={this.handleTouchMove}
+          onTouchEnd={this.handleTouchEndClearValue}
+        >
+          {clear}
+        </span>
+      </div>
+    );
+  }
+
 	renderClear () {
 		if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || this.props.isLoading) return;
 		const clear = this.props.clearRenderer();
@@ -1107,9 +1126,10 @@ class Select extends React.Component {
 					</span>
 					{removeMessage}
 					{this.renderLoading()}
-					{this.renderClear()}
+					{!this.props.multi && this.renderClear()}
 					{this.renderArrow()}
 				</div>
+				{this.props.multi && (!isOpen && this.renderBottomClear())}
 				{isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null}
 			</div>
 		);
@@ -1201,7 +1221,7 @@ Select.defaultProps = {
 	backspaceRemoves: true,
 	backspaceToRemoveMessage: 'Press backspace to remove {label}',
 	clearable: true,
-	clearAllText: 'Clear all',
+	clearAllText: 'Clear All',
 	clearRenderer: defaultClearRenderer,
 	clearValueText: 'Clear value',
 	closeOnSelect: true,

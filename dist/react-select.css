@@ -182,6 +182,15 @@
 .Select-clear-zone:hover {
   color: #D0021B;
 }
+.Select-multi-clear-zone {
+  -webkit-animation: Select-animation-fadeIn 200ms;
+  -o-animation: Select-animation-fadeIn 200ms;
+  animation: Select-animation-fadeIn 200ms;
+  color: #999;
+  cursor: pointer;
+  padding-top: 8px;
+  width: 50px;
+}
 .Select-clear {
   display: inline-block;
   font-size: 18px;
@@ -189,6 +198,10 @@
 }
 .Select--multi .Select-clear-zone {
   width: 17px;
+}
+.Select--multi .Select-multi-clear-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
 }
 .Select-arrow-zone {
   cursor: pointer;
