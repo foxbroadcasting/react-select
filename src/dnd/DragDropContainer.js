@@ -1,23 +1,25 @@
 import React from 'react';
+import createClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { DropTarget } from 'react-dnd';
 import { MULTI_SELECT } from '../constants/dragDropTypes';
 
-const DragDropContainer = React.createClass({
+const DragDropContainer = createClass({
 
 	displayName: 'DragDropContainer',
 
 	propTypes: {
-		canDrop: React.PropTypes.bool,
-		children: React.PropTypes.any,
-		className: React.PropTypes.string,
-		connectDropTarget: React.PropTypes.func,
-		contextId: React.PropTypes.oneOfType([
-			React.PropTypes.number,
-			React.PropTypes.string
+		canDrop: PropTypes.bool,
+		children: PropTypes.any,
+		className: PropTypes.string,
+		connectDropTarget: PropTypes.func,
+		contextId: PropTypes.oneOfType([
+			PropTypes.number,
+			PropTypes.string
 		]),//Unique Identifier for the drag context (parent component which contains the dnd context)
-		handleSorting: React.PropTypes.func.isRequired,
-		isOver: React.PropTypes.bool.isRequired,
+		handleSorting: PropTypes.func.isRequired,
+		isOver: PropTypes.bool.isRequired,
 	},
 
 	getInitialState () {
