@@ -1,35 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { MULTI_SELECT } from '../constants/dragDropTypes';
 
-const DragDropItem = React.createClass({
+const DragDropItem = ({ isDragging, connectDragSource, connectDragPreview, previewUrl, previewHtml, children }) =>
+	connectDragSource(
+		<div>
+			{!isDragging ? children : false}
+		</div>
+	);
 
-	displayName: 'DragDropItem',
 
-	propTypes: {
-		children: React.PropTypes.any,
-		connectDragPreview: React.PropTypes.func.isRequired,
-		connectDragSource: React.PropTypes.func.isRequired,
-		isDragging: React.PropTypes.bool.isRequired,
-		previewHeight: React.PropTypes.string,
-		previewHtml: React.PropTypes.any,
-		previewUrl: React.PropTypes.oneOfType([
-			React.PropTypes.bool,
-			React.PropTypes.string,
-		]),
-		previewWidth: React.PropTypes.string,
-	},
-
-	render() {
-		const { isDragging, connectDragSource, connectDragPreview, previewUrl, previewHtml } = this.props;
-		return connectDragSource(
-			<div>
-				{!isDragging ? this.props.children : false}
-			</div>
-		);
-	}
-
-});
+DragDropItem.propTypes = {
+  children: PropTypes.any,
+  connectDragPreview: PropTypes.func.isRequired,
+  connectDragSource: PropTypes.func.isRequired,
+  isDragging: PropTypes.bool.isRequired,
+  previewHeight: PropTypes.string,
+  previewHtml: PropTypes.any,
+  previewUrl: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+  ]),
+  previewWidth: PropTypes.string,
+};
 
 const dragSource = {
 	beginDrag(props) {
