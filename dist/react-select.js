@@ -628,41 +628,52 @@ Value.propTypes = {
 
 var MULTI_SELECT = 'multiSelect';
 
-var DragDropContainer = React__default.createClass({
+var DragDropContainer = function (_React$Component) {
+	inherits(DragDropContainer, _React$Component);
 
-	displayName: 'DragDropContainer',
+	function DragDropContainer(props) {
+		classCallCheck(this, DragDropContainer);
 
-	propTypes: {
-		canDrop: React__default.PropTypes.bool,
-		children: React__default.PropTypes.any,
-		className: React__default.PropTypes.string,
-		connectDropTarget: React__default.PropTypes.func,
-		contextId: React__default.PropTypes.oneOfType([React__default.PropTypes.number, React__default.PropTypes.string]), //Unique Identifier for the drag context (parent component which contains the dnd context)
-		handleSorting: React__default.PropTypes.func.isRequired,
-		isOver: React__default.PropTypes.bool.isRequired
-	},
+		var _this = possibleConstructorReturn(this, (DragDropContainer.__proto__ || Object.getPrototypeOf(DragDropContainer)).call(this, props));
 
-	getInitialState: function getInitialState() {
-		return {
+		_this.state = {
 			dragIndex: -1,
 			hoverIndex: -1
 		};
-	},
-	render: function render() {
-		var _props = this.props,
-		    connectDropTarget = _props.connectDropTarget,
-		    isOver = _props.isOver,
-		    canDrop = _props.canDrop,
-		    className = _props.className;
-
-		var allClassNames = classNames(className, { 'Select-drag-drop-item': canDrop && isOver, 'Select-drag-item': !canDrop && isOver });
-		return connectDropTarget(React__default.createElement(
-			'div',
-			{ className: allClassNames },
-			this.props.children
-		));
+		return _this;
 	}
-});
+
+	createClass(DragDropContainer, [{
+		key: 'render',
+		value: function render() {
+			var _props = this.props,
+			    connectDropTarget = _props.connectDropTarget,
+			    isOver = _props.isOver,
+			    canDrop = _props.canDrop,
+			    className = _props.className;
+
+			var allClassNames = classNames(className, { 'Select-drag-drop-item': canDrop && isOver, 'Select-drag-item': !canDrop && isOver });
+			return connectDropTarget(React__default.createElement(
+				'div',
+				{ className: allClassNames },
+				this.props.children
+			));
+		}
+	}]);
+	return DragDropContainer;
+}(React__default.Component);
+
+
+
+DragDropContainer.propTypes = {
+	canDrop: PropTypes.bool,
+	children: PropTypes.any,
+	className: PropTypes.string,
+	connectDropTarget: PropTypes.func,
+	contextId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), //Unique Identifier for the drag context (parent component which contains the dnd context)
+	handleSorting: PropTypes.func.isRequired,
+	isOver: PropTypes.bool.isRequired
+};
 
 var target = {
 	canDrop: function canDrop(props, monitor) {
@@ -694,33 +705,30 @@ function collect(connect, monitor) {
 
 var DragDropContainer$1 = reactDnd.DropTarget(MULTI_SELECT, target, collect)(DragDropContainer);
 
-var DragDropItem = React__default.createClass({
+var DragDropItem = function DragDropItem(_ref) {
+	var isDragging = _ref.isDragging,
+	    connectDragSource = _ref.connectDragSource,
+	    connectDragPreview = _ref.connectDragPreview,
+	    previewUrl = _ref.previewUrl,
+	    previewHtml = _ref.previewHtml,
+	    children = _ref.children;
+	return connectDragSource(React__default.createElement(
+		'div',
+		null,
+		!isDragging ? children : false
+	));
+};
 
-	displayName: 'DragDropItem',
-
-	propTypes: {
-		children: React__default.PropTypes.any,
-		connectDragPreview: React__default.PropTypes.func.isRequired,
-		connectDragSource: React__default.PropTypes.func.isRequired,
-		isDragging: React__default.PropTypes.bool.isRequired,
-		previewHeight: React__default.PropTypes.string,
-		previewHtml: React__default.PropTypes.any,
-		previewUrl: React__default.PropTypes.oneOfType([React__default.PropTypes.bool, React__default.PropTypes.string]),
-		previewWidth: React__default.PropTypes.string
-	},
-
-	render: function render() {
-		var _props = this.props,
-		    isDragging = _props.isDragging,
-		    connectDragSource = _props.connectDragSource;
-
-		return connectDragSource(React__default.createElement(
-			'div',
-			null,
-			!isDragging ? this.props.children : false
-		));
-	}
-});
+DragDropItem.propTypes = {
+	children: PropTypes.any,
+	connectDragPreview: PropTypes.func.isRequired,
+	connectDragSource: PropTypes.func.isRequired,
+	isDragging: PropTypes.bool.isRequired,
+	previewHeight: PropTypes.string,
+	previewHtml: PropTypes.any,
+	previewUrl: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+	previewWidth: PropTypes.string
+};
 
 var dragSource = {
 	beginDrag: function beginDrag(props) {
