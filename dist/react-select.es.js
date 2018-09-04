@@ -1552,11 +1552,19 @@ var Select$1 = function (_React$Component) {
 			var _this5 = this;
 
 			if (!valueArray.length) {
-				return !this.state.inputValue ? React.createElement(
-					'div',
-					{ className: 'Select-placeholder' },
-					this.props.placeholder
-				) : null;
+				if (this.props.type === 'single') {
+					return !this.state.inputValue ? React.createElement(
+						'div',
+						{ className: 'Select-placeholder' },
+						'No Panel Selected'
+					) : null;
+				} else {
+					return !this.state.inputValue ? React.createElement(
+						'div',
+						{ className: 'Select-placeholder' },
+						this.props.placeholder
+					) : null;
+				}
 			}
 			if (this.props.multi) {
 				if (this.props.reorder && !this.props.disabled) {
@@ -1670,6 +1678,7 @@ var Select$1 = function (_React$Component) {
 			if (this.props.autosize) {
 				return React.createElement(AutosizeInput, _extends({}, inputProps, { minWidth: '5' }));
 			}
+
 			return React.createElement(
 				'div',
 				{ className: className, key: 'input-wrap' },
@@ -1871,6 +1880,8 @@ var Select$1 = function (_React$Component) {
 			var _this8 = this;
 
 			var menu = this.renderMenu(options, valueArray, focusedOption);
+			var uniqueClass = this.props.type === 'single' ? "is-unique" : "";
+			var className = 'Select-menu-outer ' + uniqueClass;
 			if (!menu) {
 				return null;
 			}
@@ -1879,7 +1890,7 @@ var Select$1 = function (_React$Component) {
 				'div',
 				{ ref: function ref(_ref5) {
 						return _this8.menuContainer = _ref5;
-					}, className: 'Select-menu-outer', style: this.props.menuContainerStyle },
+					}, className: className, style: this.props.menuContainerStyle },
 				React.createElement(
 					'div',
 					{ ref: function ref(_ref4) {
@@ -1893,9 +1904,78 @@ var Select$1 = function (_React$Component) {
 			);
 		}
 	}, {
+		key: 'renderSingleSelect',
+		value: function renderSingleSelect(className, valueArray) {
+			var _this9 = this;
+
+			var focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
+			var options = this._visibleOptions = this.filterOptions(this.props.multi ? this.getValueArray(this.props.value) : null);
+
+			var focusedOption = null;
+			if (focusedOptionIndex !== null) {
+				focusedOption = this._focusedOption = options[focusedOptionIndex];
+			} else {
+				focusedOption = this._focusedOption = null;
+			}
+
+			return React.createElement(
+				'div',
+				{ ref: function ref(_ref7) {
+						return _this9.wrapper = _ref7;
+					},
+					className: className,
+					style: this.props.wrapperStyle },
+				this.renderHiddenField(valueArray),
+				React.createElement(
+					'div',
+					{ className: 'Select-unique-input-value-wrapper' },
+					this.renderValue(valueArray, true)
+				),
+				React.createElement(
+					'div',
+					{ className: 'Select-unique-input-list-wrapper' },
+					React.createElement(
+						'div',
+						{ ref: function ref(_ref6) {
+								return _this9.control = _ref6;
+							},
+							className: 'Select-control is-unique',
+							style: this.props.style,
+							onKeyDown: this.handleKeyDown,
+							onMouseDown: this.handleMouseDown,
+							onTouchEnd: this.handleTouchEnd,
+							onTouchStart: this.handleTouchStart,
+							onTouchMove: this.handleTouchMove
+						},
+						React.createElement(
+							'span',
+							null,
+							React.createElement(
+								'svg',
+								{ className: 'Select-unique-search-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
+								React.createElement(
+									'g',
+									null,
+									React.createElement('path', { d: 'M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z' })
+								),
+								');'
+							)
+						),
+						React.createElement(
+							'span',
+							{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
+							this.renderInput(valueArray, focusedOptionIndex)
+						),
+						this.renderLoading()
+					),
+					this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)
+				)
+			);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
-			var _this9 = this;
+			var _this10 = this;
 
 			var valueArray = this.getValueArray(this.props.value);
 			var options = this._visibleOptions = this.filterOptions(this.props.multi ? this.getValueArray(this.props.value) : null);
@@ -1919,7 +1999,8 @@ var Select$1 = function (_React$Component) {
 				'is-open': isOpen,
 				'is-pseudo-focused': this.state.isPseudoFocused,
 				'is-searchable': this.props.searchable,
-				'has-value': valueArray.length
+				'has-value': valueArray.length,
+				'is-unique': this.props.type === 'single'
 			});
 
 			var removeMessage = null;
@@ -1931,41 +2012,45 @@ var Select$1 = function (_React$Component) {
 				);
 			}
 
-			return React.createElement(
-				'div',
-				{ ref: function ref(_ref7) {
-						return _this9.wrapper = _ref7;
-					},
-					className: className,
-					style: this.props.wrapperStyle },
-				this.renderHiddenField(valueArray),
-				React.createElement(
+			if (this.props.type === 'single') {
+				return this.renderSingleSelect(className, valueArray);
+			} else {
+				return React.createElement(
 					'div',
-					{ ref: function ref(_ref6) {
-							return _this9.control = _ref6;
+					{ ref: function ref(_ref9) {
+							return _this10.wrapper = _ref9;
 						},
-						className: 'Select-control',
-						style: this.props.style,
-						onKeyDown: this.handleKeyDown,
-						onMouseDown: this.handleMouseDown,
-						onTouchEnd: this.handleTouchEnd,
-						onTouchStart: this.handleTouchStart,
-						onTouchMove: this.handleTouchMove
-					},
+						className: className,
+						style: this.props.wrapperStyle },
+					this.renderHiddenField(valueArray),
 					React.createElement(
-						'span',
-						{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-						this.renderValue(valueArray, isOpen),
-						this.renderInput(valueArray, focusedOptionIndex)
+						'div',
+						{ ref: function ref(_ref8) {
+								return _this10.control = _ref8;
+							},
+							className: 'Select-control',
+							style: this.props.style,
+							onKeyDown: this.handleKeyDown,
+							onMouseDown: this.handleMouseDown,
+							onTouchEnd: this.handleTouchEnd,
+							onTouchStart: this.handleTouchStart,
+							onTouchMove: this.handleTouchMove
+						},
+						React.createElement(
+							'span',
+							{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
+							this.renderValue(valueArray, isOpen),
+							this.renderInput(valueArray, focusedOptionIndex)
+						),
+						removeMessage,
+						this.renderLoading(),
+						!this.props.multi && this.renderClear(),
+						this.renderArrow()
 					),
-					removeMessage,
-					this.renderLoading(),
-					!this.props.multi && this.renderClear(),
-					this.renderArrow()
-				),
-				this.props.multi && !isOpen && this.renderBottomClear(),
-				isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null
-			);
+					this.props.multi && !isOpen && this.renderBottomClear(),
+					isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null
+				);
+			}
 		}
 	}]);
 	return Select;
@@ -2092,6 +2177,7 @@ Select$1.defaultProps = {
 	searchable: true,
 	simpleValue: false,
 	tabSelectsValue: true,
+	type: null,
 	valueComponent: Value,
 	valueKey: 'value'
 };
