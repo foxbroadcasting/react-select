@@ -864,7 +864,6 @@ class Select extends React.Component {
 			);
 		}
 
-    const placeHolder = this.props.type === 'single' ? "Search" : "";
 		return (
 			<div className={ className } key="input-wrap">
 				<input {...inputProps} />
@@ -1092,6 +1091,7 @@ class Select extends React.Component {
 				{this.renderHiddenField(valueArray)}
         <div className="Select-unique-input-value-wrapper">
 				  {this.renderValue(valueArray, true)}
+		  		{this.renderClear()}
         </div>
         <div className="Select-unique-input-list-wrapper">
 				  <div ref={ref => this.control = ref}

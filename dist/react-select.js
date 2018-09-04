@@ -1934,7 +1934,8 @@ var Select$1 = function (_React$Component) {
 				React__default.createElement(
 					'div',
 					{ className: 'Select-unique-input-value-wrapper' },
-					this.renderValue(valueArray, true)
+					this.renderValue(valueArray, true),
+					this.renderClear()
 				),
 				React__default.createElement(
 					'div',
