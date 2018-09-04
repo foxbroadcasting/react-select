@@ -474,18 +474,31 @@ var Option = function (_React$Component) {
 				this.props.children
 			) : React__default.createElement(
 				'div',
-				{ className: className,
-					style: option.style,
-					role: 'option',
-					onMouseDown: this.handleMouseDown,
-					onMouseEnter: this.handleMouseEnter,
-					onMouseMove: this.handleMouseMove,
-					onTouchStart: this.handleTouchStart,
-					onTouchMove: this.handleTouchMove,
-					onTouchEnd: this.handleTouchEnd,
-					id: instancePrefix + '-option-' + optionIndex,
-					title: option.title },
-				this.props.children
+				null,
+				this.props.isFocused && React__default.createElement(
+					'span',
+					null,
+					React__default.createElement(
+						'g',
+						null,
+						React__default.createElement('path', { d: 'M9 16.17l-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z' })
+					)
+				),
+				React__default.createElement(
+					'div',
+					{ className: className,
+						style: option.style,
+						role: 'option',
+						onMouseDown: this.handleMouseDown,
+						onMouseEnter: this.handleMouseEnter,
+						onMouseMove: this.handleMouseMove,
+						onTouchStart: this.handleTouchStart,
+						onTouchMove: this.handleTouchMove,
+						onTouchEnd: this.handleTouchEnd,
+						id: instancePrefix + '-option-' + optionIndex,
+						title: option.title },
+					this.props.children
+				)
 			);
 		}
 	}]);

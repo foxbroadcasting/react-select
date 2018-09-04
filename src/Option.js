@@ -79,19 +79,26 @@ class Option extends React.Component {
 				{this.props.children}
 			</div>
 		) : (
-			<div className={className}
-				style={option.style}
-				role="option"
-				onMouseDown={this.handleMouseDown}
-				onMouseEnter={this.handleMouseEnter}
-				onMouseMove={this.handleMouseMove}
-				onTouchStart={this.handleTouchStart}
-				onTouchMove={this.handleTouchMove}
-				onTouchEnd={this.handleTouchEnd}
-				id={instancePrefix + '-option-' + optionIndex}
-				title={option.title}>
-				{this.props.children}
-			</div>
+      <div>
+        {this.props.isFocused &&
+          (<span>
+             <g><path d="M9 16.17l-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z"></path></g>
+           </span>
+        )}
+			  <div className={className}
+			  	style={option.style}
+			  	role="option"
+			  	onMouseDown={this.handleMouseDown}
+			  	onMouseEnter={this.handleMouseEnter}
+			  	onMouseMove={this.handleMouseMove}
+			  	onTouchStart={this.handleTouchStart}
+			  	onTouchMove={this.handleTouchMove}
+			  	onTouchEnd={this.handleTouchEnd}
+			  	id={instancePrefix + '-option-' + optionIndex}
+			  	title={option.title}>
+			  	{this.props.children}
+			  </div>
+      </div>
 		);
 	}
 };
