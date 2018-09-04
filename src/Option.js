@@ -80,7 +80,7 @@ class Option extends React.Component {
 			</div>
 		) : (
       <div>
-        {this.props.isFocused &&
+        {this.props.isUniqueSelected &&
           (<span>
              <g><path d="M9 16.17l-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z"></path></g>
            </span>
@@ -110,6 +110,7 @@ Option.propTypes = {
 	isDisabled: PropTypes.bool,              // the option is disabled
 	isFocused: PropTypes.bool,               // the option is focused
 	isSelected: PropTypes.bool,              // the option is selected
+	isUniqueSelected: PropTypes.bool,        // the option as a String is selected
 	onFocus: PropTypes.func,                 // method to handle mouseEnter on option element
 	onSelect: PropTypes.func,                // method to handle click on option element
 	onUnfocus: PropTypes.func,               // method to handle mouseLeave on option element

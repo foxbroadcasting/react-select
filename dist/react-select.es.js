@@ -80,6 +80,7 @@ function menuRenderer(_ref) {
 	return options.map(function (option, i) {
 		var isSelected = valueArray && valueArray.indexOf(option) > -1;
 		var isFocused = option === focusedOption;
+		var isUniqueSelected = valueArray[0] && option && valueArray[0].label === option.label;
 		var optionClass = classNames(optionClassName, {
 			'Select-option': true,
 			'is-selected': isSelected,
@@ -95,6 +96,7 @@ function menuRenderer(_ref) {
 				isDisabled: option.disabled,
 				isFocused: isFocused,
 				isSelected: isSelected,
+				isUniqueSelected: isUniqueSelected,
 				key: 'option-' + i + '-' + option[valueKey],
 				onFocus: onFocus,
 				onSelect: onSelect,
@@ -470,7 +472,7 @@ var Option = function (_React$Component) {
 			) : React.createElement(
 				'div',
 				null,
-				this.props.isFocused && React.createElement(
+				this.props.isUniqueSelected && React.createElement(
 					'span',
 					null,
 					React.createElement(
@@ -509,6 +511,7 @@ Option.propTypes = {
 	isDisabled: PropTypes.bool, // the option is disabled
 	isFocused: PropTypes.bool, // the option is focused
 	isSelected: PropTypes.bool, // the option is selected
+	isUniqueSelected: PropTypes.bool, // the option as a String is selected
 	onFocus: PropTypes.func, // method to handle mouseEnter on option element
 	onSelect: PropTypes.func, // method to handle click on option element
 	onUnfocus: PropTypes.func, // method to handle mouseLeave on option element
