@@ -1949,7 +1949,7 @@ var Select$1 = function (_React$Component) {
 						},
 						React.createElement(
 							'span',
-							null,
+							{ className: 'Select-unique-icon-wrapper' },
 							React.createElement(
 								'svg',
 								{ className: 'Select-unique-search-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
