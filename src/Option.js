@@ -70,9 +70,7 @@ class Option extends React.Component {
 
 	render () {
 		var { option, instancePrefix, optionIndex } = this.props;
-		var className = classNames(this.props.className, option.className, {
-      'is-unique-selected': this.props.isUniqueSelected,
-    });
+		var className = classNames(this.props.className, option.className);
 
 		return option.disabled ? (
 			<div className={className}
@@ -89,7 +87,7 @@ class Option extends React.Component {
              </svg>
            </span>
         )}
-			  <div className={!this.props.isUniqueSelected ? className : null}
+			  <div className={this.props.uniqueSelected ? 'Select-option is-unique-selected': className}
 			  	style={option.style}
 			  	role="option"
 			  	onMouseDown={this.handleMouseDown}

@@ -466,9 +466,7 @@ var Option = function (_React$Component) {
 			    instancePrefix = _props.instancePrefix,
 			    optionIndex = _props.optionIndex;
 
-			var className = classNames(this.props.className, option.className, {
-				'is-unique-selected': this.props.isUniqueSelected
-			});
+			var className = classNames(this.props.className, option.className);
 
 			return option.disabled ? React__default.createElement(
 				'div',
@@ -494,7 +492,7 @@ var Option = function (_React$Component) {
 				),
 				React__default.createElement(
 					'div',
-					{ className: !this.props.isUniqueSelected ? className : null,
+					{ className: this.props.uniqueSelected ? 'Select-option is-unique-selected' : className,
 						style: option.style,
 						role: 'option',
 						onMouseDown: this.handleMouseDown,
