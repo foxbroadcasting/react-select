@@ -258,10 +258,10 @@
 .Select-unique-input-list-wrapper {
   padding: 0 15px 0 15px;
 }
-.Select-unique-icon-wrapper {
+.Select-unique-search-icon-wrapper {
   padding-left: 5px;
 }
-.Select-unique-icon-wrapper .Select-unique-search-icon {
+.Select-unique-icon {
   display: inline-flex;
   vertical-align: middle;
   fill: lightgray;
@@ -269,7 +269,6 @@
   min-width: 20px;
   height: 20px;
   min-height: 20px;
-  cursor: inherit;
 }
 @-webkit-keyframes Select-animation-fadeIn {
   from {

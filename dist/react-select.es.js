@@ -477,7 +477,7 @@ var Option = function (_React$Component) {
 					null,
 					React.createElement(
 						'svg',
-						{ viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
+						{ className: 'Select-unique-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
 						React.createElement(
 							'g',
 							null,
@@ -1970,10 +1970,10 @@ var Select$1 = function (_React$Component) {
 						},
 						React.createElement(
 							'span',
-							{ className: 'Select-unique-icon-wrapper' },
+							{ className: 'Select-unique-search-icon-wrapper' },
 							React.createElement(
 								'svg',
-								{ className: 'Select-unique-search-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
+								{ className: 'Select-unique-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
 								React.createElement(
 									'g',
 									null,
