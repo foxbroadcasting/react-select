@@ -1577,7 +1577,7 @@ var Select$1 = function (_React$Component) {
 			var _this5 = this;
 
 			if (!valueArray.length) {
-				if (this.props.type === 'single') {
+				if (this.props.type === 'unique') {
 					return !this.state.inputValue ? React__default.createElement(
 						'div',
 						{ className: 'Select-placeholder' },
@@ -1905,7 +1905,7 @@ var Select$1 = function (_React$Component) {
 			var _this8 = this;
 
 			var menu = this.renderMenu(options, valueArray, focusedOption);
-			var uniqueClass = this.props.type === 'single' ? "is-unique" : "";
+			var uniqueClass = this.props.type === 'unique' ? "is-unique" : "";
 			var className = 'Select-menu-outer ' + uniqueClass;
 			if (!menu) {
 				return null;
@@ -1929,8 +1929,8 @@ var Select$1 = function (_React$Component) {
 			);
 		}
 	}, {
-		key: 'renderSingleSelect',
-		value: function renderSingleSelect(className, valueArray) {
+		key: 'renderUniqueSelect',
+		value: function renderUniqueSelect(className, valueArray) {
 			var _this9 = this;
 
 			var focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
@@ -2026,7 +2026,7 @@ var Select$1 = function (_React$Component) {
 				'is-pseudo-focused': this.state.isPseudoFocused,
 				'is-searchable': this.props.searchable,
 				'has-value': valueArray.length,
-				'is-unique': this.props.type === 'single'
+				'is-unique': this.props.type === 'unique'
 			});
 
 			var removeMessage = null;
@@ -2038,8 +2038,8 @@ var Select$1 = function (_React$Component) {
 				);
 			}
 
-			if (this.props.type === 'single') {
-				return this.renderSingleSelect(className, valueArray);
+			if (this.props.type === 'unique') {
+				return this.renderUniqueSelect(className, valueArray);
 			} else {
 				return React__default.createElement(
 					'div',

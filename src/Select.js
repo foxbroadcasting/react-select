@@ -742,7 +742,7 @@ class Select extends React.Component {
 
 	renderValue (valueArray, isOpen) {
 		if (!valueArray.length) {
-      if (this.props.type === 'single') {
+      if (this.props.type === 'unique') {
 			  return !this.state.inputValue ? <div className="Select-placeholder">No Panel Selected</div> : null;
       } else {
 			  return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
@@ -1055,7 +1055,7 @@ class Select extends React.Component {
 
 	renderOuter (options, valueArray, focusedOption) {
 		let menu = this.renderMenu(options, valueArray, focusedOption);
-    const uniqueClass = this.props.type === 'single' ? "is-unique" : "";
+    const uniqueClass = this.props.type === 'unique' ? "is-unique" : "";
     const className = `Select-menu-outer ${uniqueClass}`;
 		if (!menu) {
 			return null;
@@ -1073,7 +1073,7 @@ class Select extends React.Component {
 		);
 	}
 
-  renderSingleSelect(className, valueArray) {
+  renderUniqueSelect(className, valueArray) {
 		const focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
 		let options = this._visibleOptions = this.filterOptions(this.props.multi ? this.getValueArray(this.props.value) : null);
 
@@ -1144,7 +1144,7 @@ class Select extends React.Component {
 			'is-pseudo-focused': this.state.isPseudoFocused,
 			'is-searchable': this.props.searchable,
 			'has-value': valueArray.length,
-      'is-unique': this.props.type === 'single',
+      'is-unique': this.props.type === 'unique',
 		});
 
 		let removeMessage = null;
@@ -1161,8 +1161,8 @@ class Select extends React.Component {
 			);
 		}
 
-    if (this.props.type === 'single') {
-      return this.renderSingleSelect(className, valueArray);
+    if (this.props.type === 'unique') {
+      return this.renderUniqueSelect(className, valueArray);
     } else {
 		  return (
 		  	<div ref={ref => this.wrapper = ref}
