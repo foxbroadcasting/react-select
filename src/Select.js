@@ -743,10 +743,10 @@ class Select extends React.Component {
 	renderValue (valueArray, isOpen) {
 		if (!valueArray.length) {
 			if (this.props.type === 'unique') {
-			  return !this.state.inputValue ? <div className="Select-placeholder">No Panel Selected</div> : null;
+				return !this.state.inputValue ? <div className="Select-placeholder">No Panel Selected</div> : null;
 			} else {
-			  return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
-      }
+				return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
+	}
 		}
 		if (this.props.multi) {
 			if (this.props.reorder && !this.props.disabled) {
@@ -863,7 +863,6 @@ class Select extends React.Component {
 				<AutosizeInput {...inputProps} minWidth="5" />
 			);
 		}
-
 		return (
 			<div className={ className } key="input-wrap">
 				<input {...inputProps} />
@@ -1076,7 +1075,6 @@ class Select extends React.Component {
 	renderUniqueSelect(className, valueArray) {
 		const focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
 		let options = this._visibleOptions = this.filterOptions(this.props.multi ? this.getValueArray(this.props.value) : null);
-
 		let focusedOption = null;
 		if (focusedOptionIndex !== null) {
 			focusedOption = this._focusedOption = options[focusedOptionIndex];
@@ -1086,36 +1084,35 @@ class Select extends React.Component {
 
 		return (
 			<div ref={ref => this.wrapper = ref}
-				 className={className}
-				 style={this.props.wrapperStyle}>
+					className={className}
+					style={this.props.wrapperStyle}>
 				{this.renderHiddenField(valueArray)}
 				<div className="Select-unique-input-value-wrapper">
-				  {this.renderValue(valueArray, true)}
-		  		{this.renderClear()}
+					{this.renderValue(valueArray, true)}
+					{this.renderClear()}
 				</div>
 				<div className="Select-unique-input-list-wrapper">
-				  <div ref={ref => this.control = ref}
-				  	className="Select-control is-unique"
-				  	style={this.props.style}
-				  	onKeyDown={this.handleKeyDown}
-				  	onMouseDown={this.handleMouseDown}
-				  	onTouchEnd={this.handleTouchEnd}
-				  	onTouchStart={this.handleTouchStart}
-				  	onTouchMove={this.handleTouchMove}
-				  >
-					   <span className="Select-unique-search-icon-wrapper">
-						    <svg className="Select-unique-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
-							      <g><path d="M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z"></path></g>
-				);
-						    </svg>
-					   </span>
-				  	<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
-				  		{this.renderInput(valueArray, focusedOptionIndex)}
-				  	</span>
-				  	{this.renderLoading()}
-				  </div>
-				  {this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)}
-        </div>
+					<div ref={ref => this.control = ref}
+							className="Select-control is-unique"
+							style={this.props.style}
+							onKeyDown={this.handleKeyDown}
+							onMouseDown={this.handleMouseDown}
+							onTouchEnd={this.handleTouchEnd}
+							onTouchStart={this.handleTouchStart}
+							onTouchMove={this.handleTouchMove}
+					>
+						<span className="Select-unique-search-icon-wrapper">
+							<svg className="Select-unique-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+								<g><path d="M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z"></path></g>
+							</svg>
+						</span>
+						<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+							{this.renderInput(valueArray, focusedOptionIndex)}
+						</span>
+						{this.renderLoading()}
+					</div>
+				{this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)}
+				</div>
 			</div>
 		);
 	}
@@ -1314,7 +1311,7 @@ Select.defaultProps = {
 	searchable: true,
 	simpleValue: false,
 	tabSelectsValue: true,
-  type: null,
+	type: null,
 	valueComponent: Value,
 	valueKey: 'value',
 };
