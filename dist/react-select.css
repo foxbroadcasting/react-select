@@ -276,6 +276,7 @@
 }
 .Select-option.is-unique-selected {
   display: inline-block;
+  background-color: initial;
 }
 @-webkit-keyframes Select-animation-fadeIn {
   from {
