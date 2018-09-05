@@ -89,7 +89,7 @@ class Option extends React.Component {
              </svg>
            </span>
         )}
-			  <div className={this.props.isUniqueSelected ? className : null}
+			  <div className={!this.props.isUniqueSelected ? className : null}
 			  	style={option.style}
 			  	role="option"
 			  	onMouseDown={this.handleMouseDown}
