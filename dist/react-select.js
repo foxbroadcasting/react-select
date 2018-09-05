@@ -466,7 +466,9 @@ var Option = function (_React$Component) {
 			    instancePrefix = _props.instancePrefix,
 			    optionIndex = _props.optionIndex;
 
-			var className = classNames(this.props.className, option.className);
+			var className = classNames(this.props.className, option.className, {
+				'is-unique-selected': this.props.isUniqueSelected
+			});
 
 			return option.disabled ? React__default.createElement(
 				'div',
@@ -476,10 +478,10 @@ var Option = function (_React$Component) {
 				this.props.children
 			) : React__default.createElement(
 				'div',
-				null,
+				{ className: this.props.isUniqueSelected ? className : null },
 				this.props.isUniqueSelected && React__default.createElement(
 					'span',
-					null,
+					{ className: 'Select-unique-selected-icon-wrapper' },
 					React__default.createElement(
 						'svg',
 						{ className: 'Select-unique-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
@@ -492,7 +494,7 @@ var Option = function (_React$Component) {
 				),
 				React__default.createElement(
 					'div',
-					{ className: className,
+					{ className: this.props.isUniqueSelected ? className : null,
 						style: option.style,
 						role: 'option',
 						onMouseDown: this.handleMouseDown,

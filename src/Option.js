@@ -70,7 +70,9 @@ class Option extends React.Component {
 
 	render () {
 		var { option, instancePrefix, optionIndex } = this.props;
-		var className = classNames(this.props.className, option.className);
+		var className = classNames(this.props.className, option.className, {
+      'is-unique-selected': this.props.isUniqueSelected,
+    });
 
 		return option.disabled ? (
 			<div className={className}
@@ -79,15 +81,15 @@ class Option extends React.Component {
 				{this.props.children}
 			</div>
 		) : (
-      <div>
+      <div className={this.props.isUniqueSelected ? className : null}>
         {this.props.isUniqueSelected &&
-          (<span>
+          (<span className="Select-unique-selected-icon-wrapper">
              <svg className="Select-unique-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
                <g><path d="M9 16.17l-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z"></path></g>
              </svg>
            </span>
         )}
-			  <div className={className}
+			  <div className={this.props.isUniqueSelected ? className : null}
 			  	style={option.style}
 			  	role="option"
 			  	onMouseDown={this.handleMouseDown}
