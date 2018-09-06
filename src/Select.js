@@ -1069,7 +1069,7 @@ class Select extends React.Component {
 		);
 	}
 
-	renderUniqueSelect(className, valueArray, focusedOption, focusedOptionIndex) {
+	renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex) {
 		return (
 			<div ref={ref => this.wrapper = ref}
 					className={className}
@@ -1148,7 +1148,7 @@ class Select extends React.Component {
 		}
 
 		if (this.props.type === 'unique') {
-		  return this.renderUniqueSelect(className, valueArray);
+		  return this.renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex);
 		} else {
 		  return (
 		  	<div ref={ref => this.wrapper = ref}

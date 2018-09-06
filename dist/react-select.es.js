@@ -1917,7 +1917,7 @@ var Select$1 = function (_React$Component) {
 		}
 	}, {
 		key: 'renderUniqueSelect',
-		value: function renderUniqueSelect(className, valueArray, focusedOption, focusedOptionIndex) {
+		value: function renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex) {
 			var _this9 = this;
 
 			return React.createElement(
@@ -2016,7 +2016,7 @@ var Select$1 = function (_React$Component) {
 			}
 
 			if (this.props.type === 'unique') {
-				return this.renderUniqueSelect(className, valueArray);
+				return this.renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex);
 			} else {
 				return React.createElement(
 					'div',
