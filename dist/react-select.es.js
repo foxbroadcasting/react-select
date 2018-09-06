@@ -1572,20 +1572,13 @@ var Select$1 = function (_React$Component) {
 			var _this5 = this;
 
 			if (!valueArray.length) {
-				if (this.props.type === 'unique') {
-					return !this.state.inputValue ? React.createElement(
-						'div',
-						{ className: 'Select-placeholder' },
-						'No Panel Selected'
-					) : null;
-				} else {
-					return !this.state.inputValue ? React.createElement(
-						'div',
-						{ className: 'Select-placeholder' },
-						this.props.placeholder
-					) : null;
-				}
+				return !this.state.inputValue ? React.createElement(
+					'div',
+					{ className: 'Select-placeholder' },
+					this.props.placeholder
+				) : null;
 			}
+
 			if (this.props.multi) {
 				if (this.props.reorder && !this.props.disabled) {
 					return valueArray.map(function (value, i) {
@@ -1899,7 +1892,7 @@ var Select$1 = function (_React$Component) {
 			var _this8 = this;
 
 			var menu = this.renderMenu(options, valueArray, focusedOption);
-			var uniqueClass = this.props.type === 'unique' ? "is-unique" : "";
+			var uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
 			var className = 'Select-menu-outer ' + uniqueClass;
 			if (!menu) {
 				return null;
@@ -1924,17 +1917,8 @@ var Select$1 = function (_React$Component) {
 		}
 	}, {
 		key: 'renderUniqueSelect',
-		value: function renderUniqueSelect(className, valueArray) {
+		value: function renderUniqueSelect(className, valueArray, focusedOption, focusedOptionIndex) {
 			var _this9 = this;
-
-			var focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
-			var options = this._visibleOptions = this.filterOptions(this.props.multi ? this.getValueArray(this.props.value) : null);
-			var focusedOption = null;
-			if (focusedOptionIndex !== null) {
-				focusedOption = this._focusedOption = options[focusedOptionIndex];
-			} else {
-				focusedOption = this._focusedOption = null;
-			}
 
 			return React.createElement(
 				'div',
@@ -1955,7 +1939,8 @@ var Select$1 = function (_React$Component) {
 					{ className: 'Select-unique-input-list-wrapper' },
 					React.createElement(
 						'div',
-						{ ref: function ref(_ref6) {
+						{
+							ref: function ref(_ref6) {
 								return _this9.control = _ref6;
 							},
 							className: 'Select-control is-unique',
@@ -2147,6 +2132,7 @@ Select$1.propTypes = {
 	style: PropTypes.object, // optional style to apply to the control
 	tabIndex: PropTypes.string, // optional tab index of the control
 	tabSelectsValue: PropTypes.bool, // whether to treat tabbing out while focused to be value selection
+	type: PropTypes.string, // which select type we use
 	value: PropTypes.any, // initial field value
 	valueComponent: PropTypes.func, // value component to render
 	valueKey: PropTypes.string, // path of the label value in option objects

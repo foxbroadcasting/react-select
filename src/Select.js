@@ -742,12 +742,9 @@ class Select extends React.Component {
 
 	renderValue (valueArray, isOpen) {
 		if (!valueArray.length) {
-			if (this.props.type === 'unique') {
-				return !this.state.inputValue ? <div className="Select-placeholder">No Panel Selected</div> : null;
-			} else {
-				return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
-	}
+			return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
 		}
+
 		if (this.props.multi) {
 			if (this.props.reorder && !this.props.disabled) {
 				return valueArray.map((value, i) => {
@@ -1054,7 +1051,7 @@ class Select extends React.Component {
 
 	renderOuter (options, valueArray, focusedOption) {
 		let menu = this.renderMenu(options, valueArray, focusedOption);
-		const uniqueClass = this.props.type === 'unique' ? "is-unique" : "";
+		const uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
 		const className = `Select-menu-outer ${uniqueClass}`;
 		if (!menu) {
 			return null;
@@ -1072,16 +1069,7 @@ class Select extends React.Component {
 		);
 	}
 
-	renderUniqueSelect(className, valueArray) {
-		const focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
-		let options = this._visibleOptions = this.filterOptions(this.props.multi ? this.getValueArray(this.props.value) : null);
-		let focusedOption = null;
-		if (focusedOptionIndex !== null) {
-			focusedOption = this._focusedOption = options[focusedOptionIndex];
-		} else {
-			focusedOption = this._focusedOption = null;
-		}
-
+	renderUniqueSelect(className, valueArray, focusedOption, focusedOptionIndex) {
 		return (
 			<div ref={ref => this.wrapper = ref}
 					className={className}
@@ -1092,7 +1080,8 @@ class Select extends React.Component {
 					{this.renderClear()}
 				</div>
 				<div className="Select-unique-input-list-wrapper">
-					<div ref={ref => this.control = ref}
+					<div
+							ref={ref => this.control = ref}
 							className="Select-control is-unique"
 							style={this.props.style}
 							onKeyDown={this.handleKeyDown}
@@ -1263,6 +1252,7 @@ Select.propTypes = {
 	style: PropTypes.object,              // optional style to apply to the control
 	tabIndex: PropTypes.string,           // optional tab index of the control
 	tabSelectsValue: PropTypes.bool,      // whether to treat tabbing out while focused to be value selection
+	type: PropTypes.string,               // which select type we use
 	value: PropTypes.any,                 // initial field value
 	valueComponent: PropTypes.func,       // value component to render
 	valueKey: PropTypes.string,           // path of the label value in option objects
