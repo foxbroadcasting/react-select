@@ -272,9 +272,10 @@
   overflow: hidden;
   float: left;
 }
-.Select-option.is-unique-selected {
+.Select-option.is-selected {
   display: inline-block;
   background-color: initial;
+  padding: 0;
 }
 @-webkit-keyframes Select-animation-fadeIn {
   from {

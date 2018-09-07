@@ -492,7 +492,7 @@ var Option = function (_React$Component) {
 				),
 				React__default.createElement(
 					'div',
-					{ className: this.props.isUniqueSelected ? 'Select-option is-unique-selected' : className,
+					{ className: this.props.isUniqueSelected ? 'Select-option is-selected' : className,
 						style: option.style,
 						role: 'option',
 						onMouseDown: this.handleMouseDown,

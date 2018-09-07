@@ -87,7 +87,7 @@ class Option extends React.Component {
 						</svg>
 					</span>
 				)}
-				<div className={this.props.isUniqueSelected ? 'Select-option is-unique-selected': className}
+				<div className={this.props.isUniqueSelected ? 'Select-option is-selected': className}
 					style={option.style}
 					role="option"
 					onMouseDown={this.handleMouseDown}
