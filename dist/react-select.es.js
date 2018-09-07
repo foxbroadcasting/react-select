@@ -1892,7 +1892,6 @@ var Select$1 = function (_React$Component) {
 			var _this8 = this;
 
 			var menu = this.renderMenu(options, valueArray, focusedOption);
-			// const uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
 			var className = 'Select-menu-outer';
 			if (!menu) {
 				return null;

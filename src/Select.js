@@ -1051,7 +1051,6 @@ class Select extends React.Component {
 
 	renderOuter (options, valueArray, focusedOption) {
 		let menu = this.renderMenu(options, valueArray, focusedOption);
-		// const uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
 		const className = `Select-menu-outer`;
 		if (!menu) {
 			return null;
