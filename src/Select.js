@@ -1051,8 +1051,8 @@ class Select extends React.Component {
 
 	renderOuter (options, valueArray, focusedOption) {
 		let menu = this.renderMenu(options, valueArray, focusedOption);
-		const uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
-		const className = `Select-menu-outer ${uniqueClass}`;
+		// const uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
+		const className = `Select-menu-outer`;
 		if (!menu) {
 			return null;
 		}
@@ -1082,7 +1082,7 @@ class Select extends React.Component {
 				<div className="Select-unique-input-list-wrapper">
 					<div
 							ref={ref => this.control = ref}
-							className="Select-control is-unique"
+							className="Select-control"
 							style={this.props.style}
 							onKeyDown={this.handleKeyDown}
 							onMouseDown={this.handleMouseDown}

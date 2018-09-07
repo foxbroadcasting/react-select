@@ -1892,8 +1892,8 @@ var Select$1 = function (_React$Component) {
 			var _this8 = this;
 
 			var menu = this.renderMenu(options, valueArray, focusedOption);
-			var uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
-			var className = 'Select-menu-outer ' + uniqueClass;
+			// const uniqueClass = this.props.type === 'unique' ? 'is-unique' : '';
+			var className = 'Select-menu-outer';
 			if (!menu) {
 				return null;
 			}
@@ -1943,7 +1943,7 @@ var Select$1 = function (_React$Component) {
 							ref: function ref(_ref6) {
 								return _this9.control = _ref6;
 							},
-							className: 'Select-control is-unique',
+							className: 'Select-control',
 							style: this.props.style,
 							onKeyDown: this.handleKeyDown,
 							onMouseDown: this.handleMouseDown,
