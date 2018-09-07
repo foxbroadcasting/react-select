@@ -80,7 +80,7 @@ function menuRenderer(_ref) {
 	return options.map(function (option, i) {
 		var isSelected = valueArray && valueArray.indexOf(option) > -1;
 		var isFocused = option === focusedOption;
-		var isUniqueSelected = valueArray[0] && option && valueArray[0].label === option.label;
+		var isUniqueSelected = valueArray && valueArray[0] && option && valueArray[0].label === option.label;
 		var optionClass = classNames(optionClassName, {
 			'Select-option': true,
 			'is-selected': isSelected,
