@@ -1051,13 +1051,12 @@ class Select extends React.Component {
 
 	renderOuter (options, valueArray, focusedOption) {
 		let menu = this.renderMenu(options, valueArray, focusedOption);
-		const className = `Select-menu-outer`;
 		if (!menu) {
 			return null;
 		}
 
 		return (
-			<div ref={ref => this.menuContainer = ref} className={className} style={this.props.menuContainerStyle}>
+			<div ref={ref => this.menuContainer = ref} className="Select-menu-outer" style={this.props.menuContainerStyle}>
 				<div ref={ref => this.menu = ref} role="listbox" tabIndex={-1} className="Select-menu" id={this._instancePrefix + '-list'}
 						 style={this.props.menuStyle}
 						 onScroll={this.handleMenuScroll}
