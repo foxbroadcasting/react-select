@@ -2015,43 +2015,43 @@ var Select$1 = function (_React$Component) {
 
 			if (this.props.type === 'unique') {
 				return this.renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex);
-			} else {
-				return React.createElement(
-					'div',
-					{ ref: function ref(_ref9) {
-							return _this10.wrapper = _ref9;
-						},
-						className: className,
-						style: this.props.wrapperStyle },
-					this.renderHiddenField(valueArray),
-					React.createElement(
-						'div',
-						{ ref: function ref(_ref8) {
-								return _this10.control = _ref8;
-							},
-							className: 'Select-control',
-							style: this.props.style,
-							onKeyDown: this.handleKeyDown,
-							onMouseDown: this.handleMouseDown,
-							onTouchEnd: this.handleTouchEnd,
-							onTouchStart: this.handleTouchStart,
-							onTouchMove: this.handleTouchMove
-						},
-						React.createElement(
-							'span',
-							{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-							this.renderValue(valueArray, isOpen),
-							this.renderInput(valueArray, focusedOptionIndex)
-						),
-						removeMessage,
-						this.renderLoading(),
-						!this.props.multi && this.renderClear(),
-						this.renderArrow()
-					),
-					this.props.multi && !isOpen && this.renderBottomClear(),
-					isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null
-				);
 			}
+
+			return React.createElement(
+				'div',
+				{ ref: function ref(_ref9) {
+						return _this10.wrapper = _ref9;
+					},
+					className: className,
+					style: this.props.wrapperStyle },
+				this.renderHiddenField(valueArray),
+				React.createElement(
+					'div',
+					{ ref: function ref(_ref8) {
+							return _this10.control = _ref8;
+						},
+						className: 'Select-control',
+						style: this.props.style,
+						onKeyDown: this.handleKeyDown,
+						onMouseDown: this.handleMouseDown,
+						onTouchEnd: this.handleTouchEnd,
+						onTouchStart: this.handleTouchStart,
+						onTouchMove: this.handleTouchMove
+					},
+					React.createElement(
+						'span',
+						{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
+						this.renderValue(valueArray, isOpen),
+						this.renderInput(valueArray, focusedOptionIndex)
+					),
+					removeMessage,
+					this.renderLoading(),
+					!this.props.multi && this.renderClear(),
+					this.renderArrow()
+				),
+				this.props.multi && !isOpen && this.renderBottomClear(),
+				isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null
+			);
 		}
 	}]);
 	return Select;

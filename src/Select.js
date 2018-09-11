@@ -1147,35 +1147,35 @@ class Select extends React.Component {
 
 		if (this.props.type === 'unique') {
 		  return this.renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex);
-		} else {
-		  return (
-		  	<div ref={ref => this.wrapper = ref}
-		  		 className={className}
-		  		 style={this.props.wrapperStyle}>
-		  		{this.renderHiddenField(valueArray)}
-		  		<div ref={ref => this.control = ref}
-		  			className="Select-control"
-		  			style={this.props.style}
-		  			onKeyDown={this.handleKeyDown}
-		  			onMouseDown={this.handleMouseDown}
-		  			onTouchEnd={this.handleTouchEnd}
-		  			onTouchStart={this.handleTouchStart}
-		  			onTouchMove={this.handleTouchMove}
-		  		>
-		  			<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
-		  				{this.renderValue(valueArray, isOpen)}
-		  				{this.renderInput(valueArray, focusedOptionIndex)}
-		  			</span>
-		  			{removeMessage}
-		  			{this.renderLoading()}
-		  			{!this.props.multi && this.renderClear()}
-		  			{this.renderArrow()}
-		  		</div>
-		  		{this.props.multi && (!isOpen && this.renderBottomClear())}
-		  		{isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null}
-		  	</div>
-		  );
-    }
+		}
+
+		return (
+			<div ref={ref => this.wrapper = ref}
+				 className={className}
+				 style={this.props.wrapperStyle}>
+				{this.renderHiddenField(valueArray)}
+				<div ref={ref => this.control = ref}
+					className="Select-control"
+					style={this.props.style}
+					onKeyDown={this.handleKeyDown}
+					onMouseDown={this.handleMouseDown}
+					onTouchEnd={this.handleTouchEnd}
+					onTouchStart={this.handleTouchStart}
+					onTouchMove={this.handleTouchMove}
+				>
+					<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+						{this.renderValue(valueArray, isOpen)}
+						{this.renderInput(valueArray, focusedOptionIndex)}
+					</span>
+					{removeMessage}
+					{this.renderLoading()}
+					{!this.props.multi && this.renderClear()}
+					{this.renderArrow()}
+				</div>
+				{this.props.multi && (!isOpen && this.renderBottomClear())}
+				{isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null}
+			</div>
+		);
 	}
 };
 
