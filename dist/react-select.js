@@ -1920,7 +1920,7 @@ var Select$1 = function (_React$Component) {
 		}
 	}, {
 		key: 'renderUniqueSelect',
-		value: function renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex) {
+		value: function renderUniqueSelect(className, isOpen, valueArray, options, focusedOption, focusedOptionIndex) {
 			var _this9 = this;
 
 			return React__default.createElement(
@@ -1937,50 +1937,54 @@ var Select$1 = function (_React$Component) {
 					this.renderValue(valueArray, true),
 					this.renderArrow()
 				),
-				React__default.createElement(
+				isOpen && React__default.createElement(
 					'div',
-					{ className: 'Select-unique-input-value-wrapper' },
-					this.renderValue(valueArray, true),
-					this.renderClear()
-				),
-				React__default.createElement(
-					'div',
-					{ className: 'Select-unique-input-list-wrapper' },
+					null,
 					React__default.createElement(
 						'div',
-						{
-							ref: function ref(_ref6) {
-								return _this9.control = _ref6;
-							},
-							className: 'Select-control',
-							style: this.props.style,
-							onKeyDown: this.handleKeyDown,
-							onMouseDown: this.handleMouseDown,
-							onTouchEnd: this.handleTouchEnd,
-							onTouchStart: this.handleTouchStart,
-							onTouchMove: this.handleTouchMove
-						},
-						React__default.createElement(
-							'span',
-							{ className: 'Select-unique-search-icon-wrapper' },
-							React__default.createElement(
-								'svg',
-								{ className: 'Select-unique-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
-								React__default.createElement(
-									'g',
-									null,
-									React__default.createElement('path', { d: 'M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z' })
-								)
-							)
-						),
-						React__default.createElement(
-							'span',
-							{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-							this.renderInput(valueArray, focusedOptionIndex)
-						),
-						this.renderLoading()
+						{ className: 'Select-unique-input-value-wrapper' },
+						this.renderValue(valueArray, true),
+						this.renderClear()
 					),
-					this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)
+					React__default.createElement(
+						'div',
+						{ className: 'Select-unique-input-list-wrapper' },
+						React__default.createElement(
+							'div',
+							{
+								ref: function ref(_ref6) {
+									return _this9.control = _ref6;
+								},
+								className: 'Select-control',
+								style: this.props.style,
+								onKeyDown: this.handleKeyDown,
+								onMouseDown: this.handleMouseDown,
+								onTouchEnd: this.handleTouchEnd,
+								onTouchStart: this.handleTouchStart,
+								onTouchMove: this.handleTouchMove
+							},
+							React__default.createElement(
+								'span',
+								{ className: 'Select-unique-search-icon-wrapper' },
+								React__default.createElement(
+									'svg',
+									{ className: 'Select-unique-icon', viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
+									React__default.createElement(
+										'g',
+										null,
+										React__default.createElement('path', { d: 'M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z' })
+									)
+								)
+							),
+							React__default.createElement(
+								'span',
+								{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
+								this.renderInput(valueArray, focusedOptionIndex)
+							),
+							this.renderLoading()
+						),
+						this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)
+					)
 				)
 			);
 		}
@@ -2025,7 +2029,7 @@ var Select$1 = function (_React$Component) {
 			}
 
 			if (this.props.type === 'unique') {
-				return this.renderUniqueSelect(className, valueArray, options, focusedOption, focusedOptionIndex);
+				return this.renderUniqueSelect(className, isOpen, valueArray, options, focusedOption, focusedOptionIndex);
 			}
 
 			return React__default.createElement(
