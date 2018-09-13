@@ -1947,7 +1947,7 @@ var Select$1 = function (_React$Component) {
 					},
 					React__default.createElement(
 						'span',
-						{ classname: 'select-multi-value-wrapper', id: this._instanceprefix + '-value' },
+						{ className: 'select-multi-value-wrapper', id: this._instanceprefix + '-value' },
 						this.renderValue(valueArray, isOpen)
 					),
 					this.renderArrow()
@@ -2059,7 +2059,7 @@ var Select$1 = function (_React$Component) {
 					},
 					React__default.createElement(
 						'span',
-						{ classname: 'select-multi-value-wrapper', id: this._instanceprefix + '-value' },
+						{ className: 'select-multi-value-wrapper', id: this._instancePrefix + '-value' },
 						this.renderValue(valueArray, isOpen),
 						this.renderInput(valueArray, focusedOptionIndex)
 					),
