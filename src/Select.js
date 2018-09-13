@@ -1075,6 +1075,10 @@ class Select extends React.Component {
 				{this.renderHiddenField(valueArray)}
 				<div className="Select-unique-input-value-wrapper">
 					{this.renderValue(valueArray, true)}
+					{this.renderArrow()}
+				</div>
+				<div className="Select-unique-input-value-wrapper">
+					{this.renderValue(valueArray, true)}
 					{this.renderClear()}
 				</div>
 				<div className="Select-unique-input-list-wrapper">
