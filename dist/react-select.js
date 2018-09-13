@@ -1925,8 +1925,8 @@ var Select$1 = function (_React$Component) {
 
 			return React__default.createElement(
 				'div',
-				{ ref: function ref(_ref7) {
-						return _this9.wrapper = _ref7;
+				{ ref: function ref(_ref8) {
+						return _this9.wrapper = _ref8;
 					},
 					className: className,
 					style: this.props.wrapperStyle },
@@ -1947,18 +1947,18 @@ var Select$1 = function (_React$Component) {
 					},
 					React__default.createElement(
 						'span',
-						{ className: 'select-multi-value-wrapper', id: this._instanceprefix + '-value' },
-						this.renderValue(valueArray, isOpen)
+						{ classname: 'select-multi-value-wrapper', id: this._instanceprefix + '-value' },
+						this.renderValue(valueArray, true)
 					),
 					this.renderArrow()
 				),
-				isOpen && React__default.createElement(
+				true && React__default.createElement(
 					'div',
 					null,
 					React__default.createElement(
 						'div',
 						{ className: 'Select-unique-input-value-wrapper' },
-						this.renderValue(valueArray, isOpen),
+						this.renderValue(valueArray, true),
 						this.renderClear()
 					),
 					React__default.createElement(
@@ -1966,7 +1966,18 @@ var Select$1 = function (_React$Component) {
 						{ className: 'Select-unique-input-list-wrapper' },
 						React__default.createElement(
 							'div',
-							null,
+							{
+								ref: function ref(_ref7) {
+									return _this9.control = _ref7;
+								},
+								className: 'Select-control',
+								style: this.props.style,
+								onKeyDown: this.handleKeyDown,
+								onMouseDown: this.handleMouseDown,
+								onTouchEnd: this.handleTouchEnd,
+								onTouchStart: this.handleTouchStart,
+								onTouchMove: this.handleTouchMove
+							},
 							React__default.createElement(
 								'span',
 								{ className: 'Select-unique-search-icon-wrapper' },
@@ -2038,16 +2049,16 @@ var Select$1 = function (_React$Component) {
 
 			return React__default.createElement(
 				'div',
-				{ ref: function ref(_ref9) {
-						return _this10.wrapper = _ref9;
+				{ ref: function ref(_ref10) {
+						return _this10.wrapper = _ref10;
 					},
 					className: className,
 					style: this.props.wrapperStyle },
 				this.renderHiddenField(valueArray),
 				React__default.createElement(
 					'div',
-					{ ref: function ref(_ref8) {
-							return _this10.control = _ref8;
+					{ ref: function ref(_ref9) {
+							return _this10.control = _ref9;
 						},
 						className: 'Select-control',
 						style: this.props.style,
@@ -2059,7 +2070,7 @@ var Select$1 = function (_React$Component) {
 					},
 					React__default.createElement(
 						'span',
-						{ className: 'select-multi-value-wrapper', id: this._instancePrefix + '-value' },
+						{ classname: 'select-multi-value-wrapper', id: this._instanceprefix + '-value' },
 						this.renderValue(valueArray, isOpen),
 						this.renderInput(valueArray, focusedOptionIndex)
 					),
