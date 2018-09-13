@@ -773,7 +773,7 @@ class Select extends React.Component {
 					return this.renderMultiValueComponent(value, i, reorder);
 				});
 			}
-		} else if (!this.state.inputValue) {
+		} else if (this.props.type === 'unique' || !this.state.inputValue) {
 			let renderLabel = this.props.valueRenderer || this.getOptionLabel;
 			let ValueComponent = this.props.valueComponent;
 			let onClick = this.props.onValueClick ? this.handleValueClick : null;

@@ -1613,7 +1613,7 @@ var Select$1 = function (_React$Component) {
 						return _this5.renderMultiValueComponent(value, i, reorder);
 					});
 				}
-			} else if (!this.state.inputValue) {
+			} else if (this.props.type === 'unique' || !this.state.inputValue) {
 				var renderLabel = this.props.valueRenderer || this.getOptionLabel;
 				var ValueComponent = this.props.valueComponent;
 				var onClick = this.props.onValueClick ? this.handleValueClick : null;
