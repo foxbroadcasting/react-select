@@ -1920,17 +1920,32 @@ var Select$1 = function (_React$Component) {
 
 			return React.createElement(
 				'div',
-				{ ref: function ref(_ref7) {
-						return _this9.wrapper = _ref7;
+				{ ref: function ref(_ref8) {
+						return _this9.wrapper = _ref8;
 					},
 					className: className,
 					style: this.props.wrapperStyle },
 				this.renderHiddenField(valueArray),
 				React.createElement(
 					'div',
-					{ className: 'Select-unique-input-value-wrapper' },
-					this.renderValue(valueArray, true),
-					this.renderArrow()
+					{
+						ref: function ref(_ref6) {
+							return _this9.control = _ref6;
+						},
+						className: 'Select-control',
+						style: this.props.style,
+						onKeyDown: this.handleKeyDown,
+						onMouseDown: this.handleMouseDown,
+						onTouchEnd: this.handleTouchEnd,
+						onTouchStart: this.handleTouchStart,
+						onTouchMove: this.handleTouchMove
+					},
+					React.createElement(
+						'div',
+						{ className: 'Select-unique-input-value-wrapper' },
+						this.renderValue(valueArray, isOpen),
+						this.renderArrow()
+					)
 				),
 				isOpen && React.createElement(
 					'div',
@@ -1938,7 +1953,7 @@ var Select$1 = function (_React$Component) {
 					React.createElement(
 						'div',
 						{ className: 'Select-unique-input-value-wrapper' },
-						this.renderValue(valueArray, true),
+						this.renderValue(valueArray, isOpen),
 						this.renderClear()
 					),
 					React.createElement(
@@ -1947,8 +1962,8 @@ var Select$1 = function (_React$Component) {
 						React.createElement(
 							'div',
 							{
-								ref: function ref(_ref6) {
-									return _this9.control = _ref6;
+								ref: function ref(_ref7) {
+									return _this9.control = _ref7;
 								},
 								className: 'Select-control',
 								style: this.props.style,
@@ -2029,16 +2044,16 @@ var Select$1 = function (_React$Component) {
 
 			return React.createElement(
 				'div',
-				{ ref: function ref(_ref9) {
-						return _this10.wrapper = _ref9;
+				{ ref: function ref(_ref10) {
+						return _this10.wrapper = _ref10;
 					},
 					className: className,
 					style: this.props.wrapperStyle },
 				this.renderHiddenField(valueArray),
 				React.createElement(
 					'div',
-					{ ref: function ref(_ref8) {
-							return _this10.control = _ref8;
+					{ ref: function ref(_ref9) {
+							return _this10.control = _ref9;
 						},
 						className: 'Select-control',
 						style: this.props.style,

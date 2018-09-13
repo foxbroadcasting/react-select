@@ -1073,14 +1073,25 @@ class Select extends React.Component {
 					className={className}
 					style={this.props.wrapperStyle}>
 				{this.renderHiddenField(valueArray)}
-				<div className="Select-unique-input-value-wrapper">
-					{this.renderValue(valueArray, true)}
-					{this.renderArrow()}
-				</div>
+				<div
+						ref={ref => this.control = ref}
+						className="Select-control"
+						style={this.props.style}
+						onKeyDown={this.handleKeyDown}
+						onMouseDown={this.handleMouseDown}
+						onTouchEnd={this.handleTouchEnd}
+						onTouchStart={this.handleTouchStart}
+						onTouchMove={this.handleTouchMove}
+				>
+				  <div className="Select-unique-input-value-wrapper">
+				  	{this.renderValue(valueArray, isOpen)}
+					  {this.renderArrow()}
+				  </div>
+        </div>
         {isOpen && (
         <div>
 				<div className="Select-unique-input-value-wrapper">
-					{this.renderValue(valueArray, true)}
+					{this.renderValue(valueArray, isOpen)}
 					{this.renderClear()}
 				</div>
 				  <div className="Select-unique-input-list-wrapper">
