@@ -1948,17 +1948,18 @@ var Select$1 = function (_React$Component) {
 					React__default.createElement(
 						'span',
 						{ className: 'select-multi-value-wrapper', id: this._instancePrefix + '-value' },
+						this.renderValue(valueArray, isOpen),
 						this.renderInput(valueArray, focusedOptionIndex)
 					),
 					this.renderArrow()
 				),
-				true && React__default.createElement(
+				isOpen && React__default.createElement(
 					'div',
 					null,
 					React__default.createElement(
 						'div',
 						{ className: 'Select-unique-input-value-wrapper' },
-						this.renderValue(valueArray, true),
+						this.renderValue(valueArray, isOpen),
 						this.renderClear()
 					),
 					React__default.createElement(

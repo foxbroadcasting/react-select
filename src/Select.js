@@ -1084,14 +1084,15 @@ class Select extends React.Component {
 						onTouchMove={this.handleTouchMove}
 				>
 				  <span className="select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+					  {this.renderValue(valueArray, isOpen)}
 				    {this.renderInput(valueArray, focusedOptionIndex)}
 				  </span>
 					{this.renderArrow()}
         </div>
-        {true && (
+        {isOpen && (
         <div>
 				<div className="Select-unique-input-value-wrapper">
-					{this.renderValue(valueArray, true)}
+					{this.renderValue(valueArray, isOpen)}
 					{this.renderClear()}
 				</div>
 				  <div className="Select-unique-input-list-wrapper">
