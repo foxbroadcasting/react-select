@@ -1323,6 +1323,7 @@ var Select$1 = function (_React$Component) {
 		value: function selectValue(value) {
 			var _this4 = this;
 
+			// TODO SABS: look further on this comment on the style issue with the select placeholder
 			// NOTE: we actually add/set the value in a callback to make sure the
 			// input value is empty to avoid styling issues in Chrome
 			if (this.props.closeOnSelect) {
@@ -1340,7 +1341,7 @@ var Select$1 = function (_React$Component) {
 			} else {
 				this.setState({
 					inputValue: this.handleInputValueChange(''),
-					isOpen: !this.props.closeOnSelect,
+					isOpen: this.props.type === 'unique' ? false : !this.props.closeOnSelect,
 					isPseudoFocused: this.state.isFocused
 				}, function () {
 					_this4.setValue(value);
@@ -1951,8 +1952,8 @@ var Select$1 = function (_React$Component) {
 					React__default.createElement(
 						'span',
 						{ className: 'select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-						this.renderValue(valueArray, isOpen, true),
-						this.renderInput(valueArray, focusedOptionIndex)
+						this.renderValue(valueArray, isOpen),
+						this.renderInput(valueArray, focusedOptionIndex, true)
 					),
 					this.renderArrow()
 				),

@@ -520,6 +520,7 @@ class Select extends React.Component {
 	}
 
 	selectValue (value) {
+    // TODO SABS: look further on this comment on the style issue with the select placeholder
 		// NOTE: we actually add/set the value in a callback to make sure the
 		// input value is empty to avoid styling issues in Chrome
 		if (this.props.closeOnSelect) {
@@ -537,7 +538,7 @@ class Select extends React.Component {
 		} else {
 			this.setState({
 				inputValue: this.handleInputValueChange(''),
-				isOpen: !this.props.closeOnSelect,
+				isOpen: this.props.type === 'unique' ? false : !this.props.closeOnSelect,
 				isPseudoFocused: this.state.isFocused,
 			}, () => {
 				this.setValue(value);
@@ -1085,8 +1086,8 @@ class Select extends React.Component {
 						onTouchMove={this.handleTouchMove}
 				>
 				  <span className="select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
-					  {this.renderValue(valueArray, isOpen, true)}
-				    {this.renderInput(valueArray, focusedOptionIndex)}
+					  {this.renderValue(valueArray, isOpen)}
+				    {this.renderInput(valueArray, focusedOptionIndex, true)}
 				  </span>
 					{this.renderArrow()}
         </div>
