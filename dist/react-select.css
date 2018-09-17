@@ -79,6 +79,7 @@
   background-color: #fff;
   box-shadow: 0px 5px 7px 3px #a3a3a3;
   border-radius: 5px;
+  margin-top: 4px;
 }
 .Select.is-unique > .outer-menu .Select-control {
   margin-top: 15px;
