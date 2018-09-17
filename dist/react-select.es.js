@@ -1336,7 +1336,7 @@ var Select$1 = function (_React$Component) {
 			} else {
 				this.setState({
 					inputValue: this.handleInputValueChange(''),
-					isOpen: this.props.type === 'unique' ? false : !this.props.closeOnSelect,
+					isOpen: this.props.type === 'unique' ? true : !this.props.closeOnSelect,
 					isPseudoFocused: this.state.isFocused
 				}, function () {
 					_this4.setValue(value);
@@ -1616,7 +1616,6 @@ var Select$1 = function (_React$Component) {
 				if (isOpen) {
 					onClick = null;
 				}
-				console.log('VALUE: ', valueArray[0]);
 				return React.createElement(
 					ValueComponent,
 					{

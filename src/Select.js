@@ -538,7 +538,7 @@ class Select extends React.Component {
 		} else {
 			this.setState({
 				inputValue: this.handleInputValueChange(''),
-				isOpen: this.props.type === 'unique' ? false : !this.props.closeOnSelect,
+				isOpen: this.props.type === 'unique' ? true : !this.props.closeOnSelect,
 				isPseudoFocused: this.state.isFocused,
 			}, () => {
 				this.setValue(value);
@@ -782,7 +782,6 @@ class Select extends React.Component {
 				onClick = null;
 			}
 			const id = this._instancePrefix + '-value-item';
-      console.log('VALUE: ', valueArray[0]);
 			return (
 				<ValueComponent
 					id={this._instancePrefix + '-value-item'}
