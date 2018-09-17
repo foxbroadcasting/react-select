@@ -1951,7 +1951,7 @@ var Select$1 = function (_React$Component) {
 					React__default.createElement(
 						'span',
 						{ className: 'select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-						this.renderValue(valueArray, isOpen),
+						this.renderValue(valueArray, isOpen, true),
 						this.renderInput(valueArray, focusedOptionIndex)
 					),
 					this.renderArrow()
