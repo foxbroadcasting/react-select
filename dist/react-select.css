@@ -75,37 +75,37 @@
 .Select .Select-arrow-zone:hover > .Select-arrow {
   border-top-color: #666;
 }
-.Select.is-unique {
+.Select.is-unique > .outer-menu {
   background-color: #fff;
   box-shadow: 0px 5px 7px 3px #a3a3a3;
   border-radius: 5px;
 }
-.Select.is-unique .Select-control {
+.Select.is-unique > .outer-menu .Select-control {
   margin-top: 15px;
   margin-bottom: 15px;
   border-radius: 5px;
 }
-.Select.is-unique .Select-menu-outer {
+.Select.is-unique > .outer-menu .Select-menu-outer {
   border: none;
   position: relative;
 }
-.Select.is-unique .Select-unique-input-value-wrapper {
+.Select.is-unique > .outer-menu .Select-unique-input-value-wrapper {
   display: flex;
   justify-content: space-between;
   padding: 15px;
   border-bottom: 1px solid lightgray;
 }
-.Select.is-unique .Select-unique-input-list-wrapper {
+.Select.is-unique > .outer-menu .Select-unique-input-list-wrapper {
   padding: 0 15px 0 15px;
 }
-.Select.is-unique .Select-unique-search-icon-wrapper {
+.Select.is-unique > .outer-menu .Select-unique-search-icon-wrapper {
   padding-left: 5px;
 }
-.Select.is-unique .Select-unique-selected-icon-wrapper {
+.Select.is-unique > .outer-menu .Select-unique-selected-icon-wrapper {
   padding-right: 5px;
   display: inline-block;
 }
-.Select.is-unique .Select-unique-icon {
+.Select.is-unique > .outer-menu .Select-unique-icon {
   display: inline-flex;
   vertical-align: middle;
   fill: lightgray;

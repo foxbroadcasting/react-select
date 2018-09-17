@@ -1091,11 +1091,11 @@ class Select extends React.Component {
 					{this.renderArrow()}
         </div>
         {isOpen && (
-        <div>
-				<div className="Select-unique-input-value-wrapper">
-					{this.renderValue(valueArray, isOpen)}
-					{this.renderClear()}
-				</div>
+        <div className="outer-menu">
+				  <div className="Select-unique-input-value-wrapper">
+				  	{this.renderValue(valueArray, isOpen)}
+				  	{this.renderClear()}
+				  </div>
 				  <div className="Select-unique-input-list-wrapper">
 				  	<div
 				  			ref={ref => this.control = ref}
