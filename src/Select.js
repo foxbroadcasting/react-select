@@ -781,6 +781,7 @@ class Select extends React.Component {
 				onClick = null;
 			}
 			const id = this._instancePrefix + '-value-item';
+      console.log('VALUE: ', valueArray[0]);
 			return (
 				<ValueComponent
 					id={this._instancePrefix + '-value-item'}
@@ -795,7 +796,7 @@ class Select extends React.Component {
 		}
 	}
 
-	renderInput (valueArray, focusedOptionIndex) {
+	renderInput (valueArray, focusedOptionIndex, isUnique = false) {
 		var className = classNames('Select-input', this.props.inputProps.className);
 		const isOpen = !!this.state.isOpen;
 
@@ -824,7 +825,7 @@ class Select extends React.Component {
 			onFocus: this.handleInputFocus,
 			ref: ref => this.input = ref,
 			required: this.state.required,
-			value: this.state.inputValue,
+			value: isUnique ? '' : this.state.inputValue,
 		};
 
 		if (this.props.inputRenderer) {

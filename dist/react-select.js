@@ -1620,6 +1620,7 @@ var Select$1 = function (_React$Component) {
 				if (isOpen) {
 					onClick = null;
 				}
+				console.log('VALUE: ', valueArray[0]);
 				return React__default.createElement(
 					ValueComponent,
 					{
@@ -1638,6 +1639,8 @@ var Select$1 = function (_React$Component) {
 		value: function renderInput(valueArray, focusedOptionIndex) {
 			var _classNames,
 			    _this6 = this;
+
+			var isUnique = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
 			var className = classNames('Select-input', this.props.inputProps.className);
 			var isOpen = !!this.state.isOpen;
@@ -1662,7 +1665,7 @@ var Select$1 = function (_React$Component) {
 					return _this6.input = _ref;
 				},
 				required: this.state.required,
-				value: this.state.inputValue
+				value: isUnique ? '' : this.state.inputValue
 			});
 
 			if (this.props.inputRenderer) {
