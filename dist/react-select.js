@@ -1958,7 +1958,7 @@ var Select$1 = function (_React$Component) {
 				),
 				isOpen && React__default.createElement(
 					'div',
-					{ className: 'outer-menu' },
+					{ className: 'unique-outer-menu' },
 					React__default.createElement(
 						'div',
 						{ className: 'Select-unique-input-value-wrapper' },

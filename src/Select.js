@@ -1091,7 +1091,7 @@ class Select extends React.Component {
 					{this.renderArrow()}
         </div>
         {isOpen && (
-        <div className="outer-menu">
+        <div className="unique-outer-menu">
 				  <div className="Select-unique-input-value-wrapper">
 				  	{this.renderValue(valueArray, isOpen)}
 				  	{this.renderClear()}
