@@ -989,6 +989,7 @@ class Select extends React.Component {
 				valueArray,
 				valueKey: this.props.valueKey,
 				onOptionRef: this.onOptionRef,
+        uniqueSelect: this.props.type === 'unique' ? true : false,
 			});
 		} else if (this.props.noResultsText) {
 			return (

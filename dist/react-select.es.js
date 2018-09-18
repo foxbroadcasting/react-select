@@ -73,14 +73,15 @@ function menuRenderer(_ref) {
 	    options = _ref.options,
 	    valueArray = _ref.valueArray,
 	    valueKey = _ref.valueKey,
-	    onOptionRef = _ref.onOptionRef;
+	    onOptionRef = _ref.onOptionRef,
+	    uniqueSelect = _ref.uniqueSelect;
 
 	var Option = optionComponent;
 
 	return options.map(function (option, i) {
 		var isSelected = valueArray && valueArray.indexOf(option) > -1;
 		var isFocused = option === focusedOption;
-		var isUniqueSelected = valueArray && valueArray[0] && option && valueArray[0].label === option.label;
+		var isUniqueSelected = uniqueSelect && valueArray && valueArray[0] && option && valueArray[0].label === option.label;
 		var optionClass = classNames(optionClassName, {
 			'Select-option': true,
 			'is-selected': isSelected,
@@ -1822,7 +1823,8 @@ var Select$1 = function (_React$Component) {
 					selectValue: this.selectValue,
 					valueArray: valueArray,
 					valueKey: this.props.valueKey,
-					onOptionRef: this.onOptionRef
+					onOptionRef: this.onOptionRef,
+					uniqueSelect: this.props.type === 'unique' ? true : false
 				});
 			} else if (this.props.noResultsText) {
 				return React.createElement(
