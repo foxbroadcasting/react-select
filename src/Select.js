@@ -538,7 +538,7 @@ class Select extends React.Component {
 		} else {
 			this.setState({
 				inputValue: this.handleInputValueChange(''),
-				isOpen: this.props.type === 'unique' ? true : !this.props.closeOnSelect,
+				isOpen: this.props.type === 'unique' || !this.props.closeOnSelect,
 				isPseudoFocused: this.state.isFocused,
 			}, () => {
 				this.setValue(value);
