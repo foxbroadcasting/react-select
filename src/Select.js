@@ -1085,7 +1085,7 @@ class Select extends React.Component {
 						onTouchStart={this.handleTouchStart}
 						onTouchMove={this.handleTouchMove}
 				>
-				  <span className="select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+				  <span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
 					  {this.renderValue(valueArray, isOpen)}
 				    {this.renderInput(valueArray, focusedOptionIndex, true)}
 				  </span>
@@ -1185,7 +1185,7 @@ class Select extends React.Component {
 					onTouchStart={this.handleTouchStart}
 					onTouchMove={this.handleTouchMove}
 				>
-					<span className="select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+					<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
 						{this.renderValue(valueArray, isOpen)}
 						{this.renderInput(valueArray, focusedOptionIndex)}
 					</span>
