@@ -14,7 +14,7 @@ function menuRenderer ({
 	valueArray,
 	valueKey,
 	onOptionRef,
-  uniqueSelect,
+	uniqueSelect,
 }) {
 	let Option = optionComponent;
 
