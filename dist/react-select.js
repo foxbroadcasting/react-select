@@ -1829,7 +1829,7 @@ var Select$1 = function (_React$Component) {
 					valueArray: valueArray,
 					valueKey: this.props.valueKey,
 					onOptionRef: this.onOptionRef,
-					uniqueSelect: this.props.type === 'unique' ? true : false
+					uniqueSelect: this.props.type === 'unique'
 				});
 			} else if (this.props.noResultsText) {
 				return React__default.createElement(
