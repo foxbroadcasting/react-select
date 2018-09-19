@@ -102,6 +102,67 @@
 	.Select-arrow-zone:hover > .Select-arrow {
 		border-top-color: @select-arrow-color-hover;
 	}
+
+  // Unique select
+  &.is-unique > .unique-outer-menu {
+    background-color: #fff;
+    box-shadow: 0px 5px 7px 3px rgba(163,163,163,1);
+    border-radius: 5px;
+    margin-top: 4px;
+    right: 10px;
+    position: absolute;
+    width: 105%;
+    z-index: 1;
+
+    .Select-control {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+
+    .Select-menu-outer {
+      border: none;
+      position: relative;
+    }
+
+    .Select-unique-input-value-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      border-bottom: 1px solid lightgray;
+    }
+    
+    .Select-unique-input-list-wrapper {
+      padding: 0 15px 0 15px;
+    }
+
+    .Select-unique-search-icon-wrapper {
+      padding-left: 5px;
+    }
+    
+    .Select-unique-selected-icon-wrapper {
+      padding-right: 5px;
+      display: inline-block
+    }
+    
+    .Select-unique-icon {
+      display: inline-flex;
+      vertical-align: middle;
+      fill: lightgray;
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      min-height: 20px;
+    }
+  }
+
+  .Select-option {
+    &.is-selected {
+      display: inline-block;
+      background-color: initial;
+      padding: 0;
+    }
+  }
 }
 
 // base

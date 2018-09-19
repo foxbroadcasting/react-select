@@ -79,18 +79,27 @@ class Option extends React.Component {
 				{this.props.children}
 			</div>
 		) : (
-			<div className={className}
-				style={option.style}
-				role="option"
-				onMouseDown={this.handleMouseDown}
-				onMouseEnter={this.handleMouseEnter}
-				onMouseMove={this.handleMouseMove}
-				onTouchStart={this.handleTouchStart}
-				onTouchMove={this.handleTouchMove}
-				onTouchEnd={this.handleTouchEnd}
-				id={instancePrefix + '-option-' + optionIndex}
-				title={option.title}>
-				{this.props.children}
+			<div className={this.props.isUniqueSelected ? className : null}>
+				{this.props.isUniqueSelected && (
+					<span className="Select-unique-selected-icon-wrapper">
+						<svg className="Select-unique-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+							<g><path d="M9 16.17l-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z" /></g>
+						</svg>
+					</span>
+				)}
+				<div className={this.props.isUniqueSelected ? 'Select-option is-selected': className}
+					style={option.style}
+					role="option"
+					onMouseDown={this.handleMouseDown}
+					onMouseEnter={this.handleMouseEnter}
+					onMouseMove={this.handleMouseMove}
+					onTouchStart={this.handleTouchStart}
+					onTouchMove={this.handleTouchMove}
+					onTouchEnd={this.handleTouchEnd}
+					id={instancePrefix + '-option-' + optionIndex}
+					title={option.title}>
+					{this.props.children}
+				</div>
 			</div>
 		);
 	}
@@ -103,6 +112,7 @@ Option.propTypes = {
 	isDisabled: PropTypes.bool,              // the option is disabled
 	isFocused: PropTypes.bool,               // the option is focused
 	isSelected: PropTypes.bool,              // the option is selected
+	isUniqueSelected: PropTypes.bool,        // the option as a String is selected
 	onFocus: PropTypes.func,                 // method to handle mouseEnter on option element
 	onSelect: PropTypes.func,                // method to handle click on option element
 	onUnfocus: PropTypes.func,               // method to handle mouseLeave on option element

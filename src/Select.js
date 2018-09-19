@@ -520,6 +520,7 @@ class Select extends React.Component {
 	}
 
 	selectValue (value) {
+    // TODO SABS: look further on this comment on the style issue with the select placeholder
 		// NOTE: we actually add/set the value in a callback to make sure the
 		// input value is empty to avoid styling issues in Chrome
 		if (this.props.closeOnSelect) {
@@ -537,7 +538,7 @@ class Select extends React.Component {
 		} else {
 			this.setState({
 				inputValue: this.handleInputValueChange(''),
-				isOpen: !this.props.closeOnSelect,
+				isOpen: this.props.type === 'unique' || !this.props.closeOnSelect,
 				isPseudoFocused: this.state.isFocused,
 			}, () => {
 				this.setValue(value);
@@ -744,6 +745,7 @@ class Select extends React.Component {
 		if (!valueArray.length) {
 			return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
 		}
+
 		if (this.props.multi) {
 			if (this.props.reorder && !this.props.disabled) {
 				return valueArray.map((value, i) => {
@@ -772,7 +774,7 @@ class Select extends React.Component {
 					return this.renderMultiValueComponent(value, i, reorder);
 				});
 			}
-		} else if (!this.state.inputValue) {
+		} else if (this.props.type === 'unique' || !this.state.inputValue) {
 			let renderLabel = this.props.valueRenderer || this.getOptionLabel;
 			let ValueComponent = this.props.valueComponent;
 			let onClick = this.props.onValueClick ? this.handleValueClick : null;
@@ -794,7 +796,7 @@ class Select extends React.Component {
 		}
 	}
 
-	renderInput (valueArray, focusedOptionIndex) {
+	renderInput (valueArray, focusedOptionIndex, isUnique = false) {
 		var className = classNames('Select-input', this.props.inputProps.className);
 		const isOpen = !!this.state.isOpen;
 
@@ -823,7 +825,7 @@ class Select extends React.Component {
 			onFocus: this.handleInputFocus,
 			ref: ref => this.input = ref,
 			required: this.state.required,
-			value: this.state.inputValue,
+			value: isUnique ? '' : this.state.inputValue,
 		};
 
 		if (this.props.inputRenderer) {
@@ -987,6 +989,7 @@ class Select extends React.Component {
 				valueArray,
 				valueKey: this.props.valueKey,
 				onOptionRef: this.onOptionRef,
+				uniqueSelect: this.props.type === 'unique',
 			});
 		} else if (this.props.noResultsText) {
 			return (
@@ -1066,6 +1069,63 @@ class Select extends React.Component {
 		);
 	}
 
+	renderUniqueSelect(className, isOpen, valueArray, options, focusedOption, focusedOptionIndex) {
+		return (
+			<div ref={ref => this.wrapper = ref}
+					className={className}
+					style={this.props.wrapperStyle}>
+				{this.renderHiddenField(valueArray)}
+				<div
+						ref={ref => this.control = ref}
+						className="Select-control"
+						style={this.props.style}
+						onKeyDown={this.handleKeyDown}
+						onMouseDown={this.handleMouseDown}
+						onTouchEnd={this.handleTouchEnd}
+						onTouchStart={this.handleTouchStart}
+						onTouchMove={this.handleTouchMove}
+				>
+				  <span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+					  {this.renderValue(valueArray, isOpen)}
+				    {this.renderInput(valueArray, focusedOptionIndex, true)}
+				  </span>
+					{this.renderArrow()}
+        </div>
+        {isOpen && (
+        <div className="unique-outer-menu">
+				  <div className="Select-unique-input-value-wrapper">
+				  	{this.renderValue(valueArray, isOpen)}
+				  	{this.renderClear()}
+				  </div>
+				  <div className="Select-unique-input-list-wrapper">
+				  	<div
+				  			ref={ref => this.control = ref}
+				  			className="Select-control"
+				  			style={this.props.style}
+				  			onKeyDown={this.handleKeyDown}
+				  			onMouseDown={this.handleMouseDown}
+				  			onTouchEnd={this.handleTouchEnd}
+				  			onTouchStart={this.handleTouchStart}
+				  			onTouchMove={this.handleTouchMove}
+				  	>
+				  		<span className="Select-unique-search-icon-wrapper">
+				  			<svg className="Select-unique-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+				  				<g><path d="M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z" /></g>
+				  			</svg>
+				  		</span>
+				  		<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+				  			{this.renderInput(valueArray, focusedOptionIndex)}
+				  		</span>
+				  		{this.renderLoading()}
+				  	</div>
+				  {this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)}
+				  </div>
+        </div>
+        )}
+			</div>
+		);
+	}
+
 	render () {
 		let valueArray = this.getValueArray(this.props.value);
 		let options = this._visibleOptions = this.filterOptions(this.props.multi ? this.getValueArray(this.props.value) : null);
@@ -1090,6 +1150,7 @@ class Select extends React.Component {
 			'is-pseudo-focused': this.state.isPseudoFocused,
 			'is-searchable': this.props.searchable,
 			'has-value': valueArray.length,
+			'is-unique': this.props.type === 'unique',
 		});
 
 		let removeMessage = null;
@@ -1104,6 +1165,10 @@ class Select extends React.Component {
 					{this.props.backspaceToRemoveMessage.replace('{label}', valueArray[valueArray.length - 1][this.props.labelKey])}
 				</span>
 			);
+		}
+
+		if (this.props.type === 'unique') {
+		  return this.renderUniqueSelect(className, isOpen, valueArray, options, focusedOption, focusedOptionIndex);
 		}
 
 		return (
@@ -1207,6 +1272,7 @@ Select.propTypes = {
 	style: PropTypes.object,              // optional style to apply to the control
 	tabIndex: PropTypes.string,           // optional tab index of the control
 	tabSelectsValue: PropTypes.bool,      // whether to treat tabbing out while focused to be value selection
+	type: PropTypes.string,               // which select type we use
 	value: PropTypes.any,                 // initial field value
 	valueComponent: PropTypes.func,       // value component to render
 	valueKey: PropTypes.string,           // path of the label value in option objects
@@ -1255,6 +1321,7 @@ Select.defaultProps = {
 	searchable: true,
 	simpleValue: false,
 	tabSelectsValue: true,
+	type: null,
 	valueComponent: Value,
 	valueKey: 'value',
 };
