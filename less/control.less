@@ -111,7 +111,8 @@
     margin-top: 4px;
     right: 10px;
     position: absolute;
-    width: 105%;
+    max-width: 260px;
+    width: 260px;
     z-index: 1;
 
     .Select-control {
@@ -136,13 +137,16 @@
       padding: 0 15px 0 15px;
     }
 
-    .Select-unique-search-icon-wrapper {
-      padding-left: 5px;
+    .Select-unique-row-option {
+      position: relative;
     }
-    
+
     .Select-unique-selected-icon-wrapper {
-      padding-right: 5px;
-      display: inline-block
+      align-items: center;
+      display: flex;
+      float: left;
+      height: 100%;
+      position: absolute;
     }
     
     .Select-unique-icon {
@@ -158,10 +162,10 @@
 
   .Select-option {
     &.is-selected {
-      display: inline-block;
       background-color: initial;
-      padding: 0;
     }
+
+    padding: 8px 0 8px 30px;
   }
 }
 
