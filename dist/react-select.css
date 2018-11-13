@@ -86,6 +86,9 @@
   width: 260px;
   z-index: 1;
 }
+.Select.is-unique > .unique-outer-menu .Select-input {
+  padding-left: 5px;
+}
 .Select.is-unique > .unique-outer-menu .Select-control {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -114,6 +117,9 @@
   height: 100%;
   position: absolute;
 }
+.Select.is-unique > .unique-outer-menu .Select-unique-search-icon-wrapper {
+  padding-left: 10px;
+}
 .Select.is-unique > .unique-outer-menu .Select-unique-icon {
   display: inline-flex;
   vertical-align: middle;
@@ -124,7 +130,7 @@
   min-height: 20px;
 }
 .Select .Select-option {
-  padding: 8px 0 8px 30px;
+  padding: 8px 0 8px 22px;
 }
 .Select .Select-option.is-selected {
   background-color: initial;
