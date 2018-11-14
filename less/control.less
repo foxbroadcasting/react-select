@@ -166,14 +166,21 @@
       height: 20px;
       min-height: 20px;
     }
+
+    .Select-option {
+      &.is-selected {
+        background-color: initial;
+      }
+      padding: 8px 0 8px 22px;
+    }
   }
 
   .Select-option {
     &.is-selected {
+      display: inline-block;
       background-color: initial;
+      padding: 0;
     }
-
-    padding: 8px 0 8px 22px;
   }
 }
 

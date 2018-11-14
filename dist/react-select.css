@@ -129,11 +129,16 @@
   height: 20px;
   min-height: 20px;
 }
-.Select .Select-option {
+.Select.is-unique > .unique-outer-menu .Select-option {
   padding: 8px 0 8px 22px;
 }
-.Select .Select-option.is-selected {
+.Select.is-unique > .unique-outer-menu .Select-option.is-selected {
   background-color: initial;
+}
+.Select .Select-option.is-selected {
+  display: inline-block;
+  background-color: initial;
+  padding: 0;
 }
 .Select-control {
   background-color: #fff;
