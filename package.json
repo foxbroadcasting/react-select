@@ -1,6 +1,6 @@
 {
   "name": "@foxdcg/react-select",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "A Select control built with and for ReactJS",
   "main": "lib/index.js",
   "jsnext:main": "dist/react-select.es.js",
