@@ -79,7 +79,7 @@ class Option extends React.Component {
 				{this.props.children}
 			</div>
 		) : (
-			<div className={this.props.isUniqueSelected ? className : null}>
+      <div className="Select-unique-row-option">
 				{this.props.isUniqueSelected && (
 					<span className="Select-unique-selected-icon-wrapper">
 						<svg className="Select-unique-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
@@ -87,20 +87,22 @@ class Option extends React.Component {
 						</svg>
 					</span>
 				)}
-				<div className={this.props.isUniqueSelected ? 'Select-option is-selected': className}
-					style={option.style}
-					role="option"
-					onMouseDown={this.handleMouseDown}
-					onMouseEnter={this.handleMouseEnter}
-					onMouseMove={this.handleMouseMove}
-					onTouchStart={this.handleTouchStart}
-					onTouchMove={this.handleTouchMove}
-					onTouchEnd={this.handleTouchEnd}
-					id={instancePrefix + '-option-' + optionIndex}
-					title={option.title}>
-					{this.props.children}
+				<div className={this.props.isUniqueSelected ? className : null}>
+					<div className={this.props.isUniqueSelected ? 'is-selected': className}
+						style={option.style}
+						role="option"
+						onMouseDown={this.handleMouseDown}
+						onMouseEnter={this.handleMouseEnter}
+						onMouseMove={this.handleMouseMove}
+						onTouchStart={this.handleTouchStart}
+						onTouchMove={this.handleTouchMove}
+						onTouchEnd={this.handleTouchEnd}
+						id={instancePrefix + '-option-' + optionIndex}
+						title={option.title}>
+						{this.props.children}
+					</div>
 				</div>
-			</div>
+      </div>
 		);
 	}
 };

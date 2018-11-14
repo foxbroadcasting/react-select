@@ -472,7 +472,7 @@ var Option = function (_React$Component) {
 				this.props.children
 			) : React.createElement(
 				'div',
-				{ className: this.props.isUniqueSelected ? className : null },
+				{ className: 'Select-unique-row-option' },
 				this.props.isUniqueSelected && React.createElement(
 					'span',
 					{ className: 'Select-unique-selected-icon-wrapper' },
@@ -488,18 +488,22 @@ var Option = function (_React$Component) {
 				),
 				React.createElement(
 					'div',
-					{ className: this.props.isUniqueSelected ? 'Select-option is-selected' : className,
-						style: option.style,
-						role: 'option',
-						onMouseDown: this.handleMouseDown,
-						onMouseEnter: this.handleMouseEnter,
-						onMouseMove: this.handleMouseMove,
-						onTouchStart: this.handleTouchStart,
-						onTouchMove: this.handleTouchMove,
-						onTouchEnd: this.handleTouchEnd,
-						id: instancePrefix + '-option-' + optionIndex,
-						title: option.title },
-					this.props.children
+					{ className: this.props.isUniqueSelected ? className : null },
+					React.createElement(
+						'div',
+						{ className: this.props.isUniqueSelected ? 'is-selected' : className,
+							style: option.style,
+							role: 'option',
+							onMouseDown: this.handleMouseDown,
+							onMouseEnter: this.handleMouseEnter,
+							onMouseMove: this.handleMouseMove,
+							onTouchStart: this.handleTouchStart,
+							onTouchMove: this.handleTouchMove,
+							onTouchEnd: this.handleTouchEnd,
+							id: instancePrefix + '-option-' + optionIndex,
+							title: option.title },
+						this.props.children
+					)
 				)
 			);
 		}
@@ -794,7 +798,7 @@ var Select$1 = function (_React$Component) {
 
 		var _this = possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).call(this, props));
 
-		['clearValue', 'focusOption', 'handleInputBlur', 'handleInputChange', 'handleInputFocus', 'handleInputValueChange', 'handleKeyDown', 'handleMenuScroll', 'handleMouseDown', 'handleMouseDownOnArrow', 'handleMouseDownOnMenu', 'handleRequired', 'handleTouchOutside', 'handleTouchMove', 'handleTouchStart', 'handleTouchEnd', 'handleTouchEndClearValue', 'handleValueClick', 'getOptionLabel', 'onOptionRef', 'removeValue', 'selectValue', 'reorderValueArray'].forEach(function (fn) {
+		['clearValue', 'focusOption', 'handleInputBlur', 'handleInputChange', 'handleInputFocus', 'handleInputValueChange', 'handleKeyDown', 'handleMenuScroll', 'handleMouseDown', 'handleMouseDownOnArrow', 'handleMouseDownOnMenu', 'handleRequired', 'handleTouchOutside', 'handleTouchMove', 'handleTouchStart', 'handleTouchEnd', 'handleTouchEndClearValue', 'handleValueClick', 'getOptionLabel', 'onOptionRef', 'openUniqueDropdown', 'removeValue', 'selectValue', 'reorderValueArray'].forEach(function (fn) {
 			return _this[fn] = _this[fn].bind(_this);
 		});
 
@@ -1067,6 +1071,14 @@ var Select$1 = function (_React$Component) {
 				});
 			}
 			this.hasScrolledToOption = false;
+		}
+	}, {
+		key: 'openUniqueDropdown',
+		value: function openUniqueDropdown() {
+			var isOpen = this.state.isOpen || this._openAfterFocus || this.props.openOnFocus;
+			this.setState({
+				isOpen: isOpen
+			});
 		}
 	}, {
 		key: 'handleInputFocus',
@@ -1655,13 +1667,16 @@ var Select$1 = function (_React$Component) {
 				className: className,
 				tabIndex: this.props.tabIndex,
 				onBlur: this.handleInputBlur,
+				onClick: isUnique ? this.openUniqueDropdown : null,
 				onChange: this.handleInputChange,
 				onFocus: this.handleInputFocus,
 				ref: function ref(_ref) {
 					return _this6.input = _ref;
 				},
 				required: this.state.required,
-				value: isUnique ? '' : this.state.inputValue
+				value: isUnique ? '' : this.state.inputValue,
+				readOnly: isUnique ? 'readOnly' : '',
+				autoFocus: !isUnique && isOpen ? 'autoFocus' : ''
 			});
 
 			if (this.props.inputRenderer) {
@@ -1692,7 +1707,7 @@ var Select$1 = function (_React$Component) {
 					style: { border: 0, width: 1, display: 'inline-block' } }));
 			}
 
-			if (this.props.autosize) {
+			if (this.props.autosize && !isUnique) {
 				return React.createElement(AutosizeInput, _extends({}, inputProps, { minWidth: '5' }));
 			}
 			return React.createElement(

@@ -58,6 +58,7 @@ class Select extends React.Component {
 			'handleValueClick',
 			'getOptionLabel',
 			'onOptionRef',
+			'openUniqueDropdown',
 			'removeValue',
 			'selectValue',
 			'reorderValueArray',
@@ -312,6 +313,13 @@ class Select extends React.Component {
 			});
 		}
 		this.hasScrolledToOption = false;
+	}
+
+	openUniqueDropdown() {
+		var isOpen = this.state.isOpen || this._openAfterFocus || this.props.openOnFocus;
+		this.setState({
+			isOpen: isOpen,
+		});
 	}
 
 	handleInputFocus (event) {
@@ -821,11 +829,14 @@ class Select extends React.Component {
 			className: className,
 			tabIndex: this.props.tabIndex,
 			onBlur: this.handleInputBlur,
+			onClick: isUnique ? this.openUniqueDropdown : null,
 			onChange: this.handleInputChange,
 			onFocus: this.handleInputFocus,
 			ref: ref => this.input = ref,
 			required: this.state.required,
 			value: isUnique ? '' : this.state.inputValue,
+			readOnly: isUnique ? 'readOnly' : '',
+			autoFocus: !isUnique && isOpen ? 'autoFocus': '',
 		};
 
 		if (this.props.inputRenderer) {
@@ -856,7 +867,7 @@ class Select extends React.Component {
 			);
 		}
 
-		if (this.props.autosize) {
+		if (this.props.autosize && !isUnique) {
 			return (
 				<AutosizeInput {...inputProps} minWidth="5" />
 			);
@@ -1085,14 +1096,14 @@ class Select extends React.Component {
 						onTouchStart={this.handleTouchStart}
 						onTouchMove={this.handleTouchMove}
 				>
-				  <span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
-					  {this.renderValue(valueArray, isOpen)}
-				    {this.renderInput(valueArray, focusedOptionIndex, true)}
-				  </span>
+					<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+						{this.renderValue(valueArray, isOpen)}
+						{this.renderInput(valueArray, focusedOptionIndex, true)}
+					</span>
 					{this.renderArrow()}
-        </div>
-        {isOpen && (
-        <div className="unique-outer-menu">
+				</div>
+				{isOpen && (
+				<div className="unique-outer-menu">
 				  <div className="Select-unique-input-value-wrapper">
 				  	{this.renderValue(valueArray, isOpen)}
 				  	{this.renderClear()}
