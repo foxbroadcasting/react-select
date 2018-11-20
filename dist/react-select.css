@@ -53,7 +53,7 @@
 }
 .Select.has-value.Select--single > .Select-control .Select-value .Select-value-label,
 .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
-  color: #333;
+  color: #000;
 }
 .Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label,
 .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label {
@@ -75,10 +75,13 @@
 .Select .Select-arrow-zone:hover > .Select-arrow {
   border-top-color: #666;
 }
+.Select.is-unique > .Select-control {
+  border-radius: 4px;
+}
 .Select.is-unique > .unique-outer-menu {
   background-color: #fff;
   box-shadow: 0px 5px 7px 3px #a3a3a3;
-  border-radius: 5px;
+  border-radius: 4px;
   margin-top: 4px;
   right: 10px;
   position: absolute;
@@ -92,7 +95,7 @@
 .Select.is-unique > .unique-outer-menu .Select-control {
   margin-top: 15px;
   margin-bottom: 15px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 .Select.is-unique > .unique-outer-menu .Select-menu-outer {
   border: none;
@@ -123,7 +126,7 @@
 .Select.is-unique > .unique-outer-menu .Select-unique-icon {
   display: inline-flex;
   vertical-align: middle;
-  fill: lightgray;
+  fill: #000;
   width: 20px;
   min-width: 20px;
   height: 20px;
@@ -145,7 +148,7 @@
   border-color: #d9d9d9 #ccc #b3b3b3;
   border-radius: 4px;
   border: 1px solid #ccc;
-  color: #333;
+  color: #000;
   cursor: default;
   display: table;
   border-spacing: 0;
@@ -165,7 +168,7 @@
 .Select-placeholder,
 .Select--single > .Select-control .Select-value {
   bottom: 0;
-  color: #aaa;
+  color: #000;
   left: 0;
   line-height: 34px;
   padding-left: 10px;
@@ -227,7 +230,7 @@
   box-sizing: border-box;
   border-radius: 50%;
   border: 2px solid #ccc;
-  border-right-color: #333;
+  border-right-color: #000;
   display: inline-block;
   position: relative;
   vertical-align: middle;
@@ -236,7 +239,7 @@
   -webkit-animation: Select-animation-fadeIn 200ms;
   -o-animation: Select-animation-fadeIn 200ms;
   animation: Select-animation-fadeIn 200ms;
-  color: #999;
+  color: #000;
   cursor: pointer;
   display: table-cell;
   position: relative;
@@ -251,7 +254,7 @@
   -webkit-animation: Select-animation-fadeIn 200ms;
   -o-animation: Select-animation-fadeIn 200ms;
   animation: Select-animation-fadeIn 200ms;
-  color: #999;
+  color: #000;
   cursor: pointer;
   padding-top: 8px;
   width: 55px;
@@ -337,7 +340,7 @@
 .Select-option {
   box-sizing: border-box;
   background-color: #fff;
-  color: #666666;
+  color: #000;
   cursor: pointer;
   display: block;
   padding: 8px 10px;
@@ -350,21 +353,21 @@
   background-color: #f5faff;
   /* Fallback color for IE 8 */
   background-color: rgba(0, 126, 255, 0.04);
-  color: #333;
+  color: #000;
 }
 .Select-option.is-focused {
   background-color: #ebf5ff;
   /* Fallback color for IE 8 */
   background-color: rgba(0, 126, 255, 0.08);
-  color: #333;
+  color: #000;
 }
 .Select-option.is-disabled {
-  color: #cccccc;
+  color: #999999;
   cursor: default;
 }
 .Select-noresults {
   box-sizing: border-box;
-  color: #999999;
+  color: #666666;
   cursor: default;
   display: block;
   padding: 8px 10px;
@@ -381,7 +384,7 @@
   background-color: #ebf5ff;
   /* Fallback color for IE 8 */
   background-color: rgba(0, 126, 255, 0.08);
-  border-radius: 2px;
+  border-radius: 4px;
   border: 1px solid #c2e0ff;
   /* Fallback color for IE 8 */
   border: 1px solid rgba(0, 126, 255, 0.24);
@@ -425,8 +428,8 @@
   vertical-align: middle;
 }
 .Select--multi .Select-value-label {
-  border-bottom-right-radius: 2px;
-  border-top-right-radius: 2px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
   cursor: default;
   padding: 2px 5px;
 }
@@ -440,8 +443,8 @@
 }
 .Select--multi .Select-value-icon {
   cursor: pointer;
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
   border-right: 1px solid #c2e0ff;
   /* Fallback color for IE 8 */
   border-right: 1px solid rgba(0, 126, 255, 0.24);

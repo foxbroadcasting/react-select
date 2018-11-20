@@ -1325,7 +1325,7 @@ Select.defaultProps = {
 	openOnClick: true,
 	optionComponent: Option,
 	pageSize: 5,
-	placeholder: 'Select...',
+	placeholder: 'Select',
 	reorder: false,
 	required: false,
 	scrollMenuIntoView: true,
