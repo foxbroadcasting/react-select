@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function arrowRenderer ({ onMouseDown, isOpen }) {
+export default function arrowRenderer ({ onMouseDown }) {
 	return (
 		<span
 			onMouseDown={onMouseDown}
