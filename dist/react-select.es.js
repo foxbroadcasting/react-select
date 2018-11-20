@@ -2278,7 +2278,7 @@ var defaultProps = {
 	children: defaultChildren,
 	ignoreAccents: true,
 	ignoreCase: true,
-	loadingPlaceholder: 'Loading...',
+	loadingPlaceholder: '',
 	options: [],
 	searchPromptText: 'Type to search'
 };
