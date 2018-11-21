@@ -83,10 +83,10 @@
   box-shadow: 0px 5px 7px 3px #a3a3a3;
   border-radius: 4px;
   margin-top: 4px;
-  right: 10px;
+  right: 0px;
   position: absolute;
-  max-width: 260px;
-  width: 260px;
+  max-width: 320px;
+  width: 320px;
   z-index: 1;
 }
 .Select.is-unique > .unique-outer-menu .Select-input {
@@ -95,16 +95,17 @@
 .Select.is-unique > .unique-outer-menu .Select-control {
   border-radius: 4px;
   margin: 15px;
-  max-width: 230px;
+  max-width: 290px;
 }
 .Select.is-unique > .unique-outer-menu .Select-placeholder {
-  height: 52px;
-  padding: 10px 0 10px 16px;
+  line-height: unset;
+  position: relative;
+  padding: 0;
 }
 .Select.is-unique > .unique-outer-menu .Select-menu-outer {
   border: none;
-  padding-left: 15px;
-  padding-right: 15px;
+  box-shadow: none;
+  margin-bottom: 12px;
   position: relative;
 }
 .Select.is-unique > .unique-outer-menu .Select-clear-zone {
@@ -117,9 +118,9 @@
   align-items: center;
   border-bottom: 1px solid lightgray;
   display: flex;
-  height: 52px;
   justify-content: space-between;
   padding: 10px 0 10px 16px;
+  overflow: auto;
 }
 .Select.is-unique > .unique-outer-menu .Select-unique-row-option {
   position: relative;
@@ -129,6 +130,7 @@
   display: flex;
   float: left;
   height: 100%;
+  padding-left: 16px;
   position: absolute;
 }
 .Select.is-unique > .unique-outer-menu .Select-unique-search-icon-wrapper {
@@ -144,7 +146,7 @@
   min-height: 20px;
 }
 .Select.is-unique > .unique-outer-menu .Select-option {
-  padding: 8px 0 8px 22px;
+  padding: 8px 0 8px 40px;
 }
 .Select.is-unique > .unique-outer-menu .Select-option.is-selected {
   background-color: initial;
