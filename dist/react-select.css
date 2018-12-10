@@ -91,9 +91,9 @@
 }
 .Select.is-unique .Select-placeholder,
 .Select .Select-value {
+  line-height: unset;
   display: inline-block;
   padding-top: 2px;
-  padding-bottom: 2px;
   position: relative !important;
 }
 .Select.is-unique .Select-input {
