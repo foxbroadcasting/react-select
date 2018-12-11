@@ -79,6 +79,13 @@
 		padding-right: 8px;
 	}
 
+	&.has-value.Select--single.is-unique > .Select-control .Select-value,
+	&.has-value.is-pseudo-focused.Select--single.is-unique > .Select-control .Select-value {
+		.Select-value-label {
+			color: #FFF;
+		}
+	}
+
 	&.has-value.Select--single > .Select-control .Select-value,
 	&.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value {
 		.Select-value-label {
@@ -120,8 +127,23 @@
     }
   }
 
+  &.is-unique {
+    &.is-open, &.has-value, &.is-focused, &.is-pseudo-focused {
+      .Select-control {
+        background: #2D3F5E;
+
+        .Select-arrow-zone span svg {
+          fill: #FFF;
+        }
+
+        .Select-placeholder, .Select-value .Select-value-label {
+          color: #FFF;
+        }
+      }
+    }
+  }
+
   &.is-unique .Select-placeholder, .Select-value {
-    line-height: unset;
     display: inline-block;
     padding-top: 2px;
     position: relative !important;
@@ -147,6 +169,7 @@
     z-index: 1;
 
     .Select-control {
+      background: #FFF;
       border-radius: 4px;
       margin: 15px;
       max-width: 290px;

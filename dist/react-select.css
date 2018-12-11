@@ -54,6 +54,10 @@
 .Select.has-value.is-clearable.Select--single.is-unique > .Select-control .Select-value {
   padding-right: 8px;
 }
+.Select.has-value.Select--single.is-unique > .Select-control .Select-value .Select-value-label,
+.Select.has-value.is-pseudo-focused.Select--single.is-unique > .Select-control .Select-value .Select-value-label {
+  color: #FFF;
+}
 .Select.has-value.Select--single > .Select-control .Select-value .Select-value-label,
 .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
   color: #000;
@@ -89,9 +93,30 @@
 .Select.is-unique > .Select-control:hover {
   background: rgba(0, 0, 0, 0.04);
 }
+.Select.is-unique.is-open .Select-control,
+.Select.is-unique.has-value .Select-control,
+.Select.is-unique.is-focused .Select-control,
+.Select.is-unique.is-pseudo-focused .Select-control {
+  background: #2D3F5E;
+}
+.Select.is-unique.is-open .Select-control .Select-arrow-zone span svg,
+.Select.is-unique.has-value .Select-control .Select-arrow-zone span svg,
+.Select.is-unique.is-focused .Select-control .Select-arrow-zone span svg,
+.Select.is-unique.is-pseudo-focused .Select-control .Select-arrow-zone span svg {
+  fill: #FFF;
+}
+.Select.is-unique.is-open .Select-control .Select-placeholder,
+.Select.is-unique.has-value .Select-control .Select-placeholder,
+.Select.is-unique.is-focused .Select-control .Select-placeholder,
+.Select.is-unique.is-pseudo-focused .Select-control .Select-placeholder,
+.Select.is-unique.is-open .Select-control .Select-value .Select-value-label,
+.Select.is-unique.has-value .Select-control .Select-value .Select-value-label,
+.Select.is-unique.is-focused .Select-control .Select-value .Select-value-label,
+.Select.is-unique.is-pseudo-focused .Select-control .Select-value .Select-value-label {
+  color: #FFF;
+}
 .Select.is-unique .Select-placeholder,
 .Select .Select-value {
-  line-height: unset;
   display: inline-block;
   padding-top: 2px;
   position: relative !important;
@@ -115,6 +140,7 @@
   z-index: 1;
 }
 .Select.is-unique > .unique-outer-menu .Select-control {
+  background: #FFF;
   border-radius: 4px;
   margin: 15px;
   max-width: 290px;
