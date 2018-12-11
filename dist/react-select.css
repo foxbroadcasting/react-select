@@ -188,6 +188,9 @@
   height: 20px;
   min-height: 20px;
 }
+.Select.is-unique > .unique-outer-menu .Select-unique-menu-outer-loading {
+  padding: 8px 24px 8px 36px;
+}
 .Select.is-unique > .unique-outer-menu .Select-option {
   padding: 8px 0 8px 40px;
 }

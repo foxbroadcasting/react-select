@@ -1927,6 +1927,13 @@ var Select$1 = function (_React$Component) {
 		value: function renderOuter(options, valueArray, focusedOption) {
 			var _this8 = this;
 
+			var isUnique = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+			var loadingDiv = React__default.createElement(
+				'div',
+				{ className: 'Select-unique-menu-outer-loading' },
+				'Loading...'
+			);
 			var menu = this.renderMenu(options, valueArray, focusedOption);
 			if (!menu) {
 				return null;
@@ -1945,7 +1952,7 @@ var Select$1 = function (_React$Component) {
 						style: this.props.menuStyle,
 						onScroll: this.handleMenuScroll,
 						onMouseDown: this.handleMouseDownOnMenu },
-					menu
+					isUnique && this.props.isLoading ? loadingDiv : menu
 				)
 			);
 		}
@@ -2027,10 +2034,9 @@ var Select$1 = function (_React$Component) {
 								'span',
 								{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
 								this.renderInput(valueArray, focusedOptionIndex)
-							),
-							this.renderLoading()
+							)
 						),
-						this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)
+						this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption, true)
 					)
 				)
 			);

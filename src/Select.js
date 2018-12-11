@@ -1062,7 +1062,8 @@ class Select extends React.Component {
 		return null;
 	}
 
-	renderOuter (options, valueArray, focusedOption) {
+	renderOuter (options, valueArray, focusedOption, isUnique = false) {
+		const loadingDiv = (<div className='Select-unique-menu-outer-loading'>Loading...</div>);
 		let menu = this.renderMenu(options, valueArray, focusedOption);
 		if (!menu) {
 			return null;
@@ -1074,7 +1075,7 @@ class Select extends React.Component {
 						 style={this.props.menuStyle}
 						 onScroll={this.handleMenuScroll}
 						 onMouseDown={this.handleMouseDownOnMenu}>
-					{menu}
+						 {isUnique && this.props.isLoading ? loadingDiv : menu}
 				</div>
 			</div>
 		);
@@ -1127,9 +1128,8 @@ class Select extends React.Component {
 				  		<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
 				  			{this.renderInput(valueArray, focusedOptionIndex)}
 				  		</span>
-				  		{this.renderLoading()}
 				  	</div>
-				  {this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)}
+				  {this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption, true)}
 				  </div>
         </div>
         )}
