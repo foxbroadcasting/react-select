@@ -1601,12 +1601,19 @@ var Select$1 = function (_React$Component) {
 		value: function renderValue(valueArray, isOpen) {
 			var _this5 = this;
 
+			var isUnique = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+			var placeholderDiv = isUnique ? React__default.createElement(
+				'div',
+				{ className: 'Select-unique-placeholder' },
+				'No Item Selected'
+			) : React__default.createElement(
+				'div',
+				{ className: 'Select-placeholder' },
+				this.props.placeholder
+			);
 			if (!valueArray.length) {
-				return !this.state.inputValue ? React__default.createElement(
-					'div',
-					{ className: 'Select-placeholder' },
-					this.props.placeholder
-				) : null;
+				return !this.state.inputValue ? placeholderDiv : null;
 			}
 
 			if (this.props.multi) {
@@ -1997,8 +2004,16 @@ var Select$1 = function (_React$Component) {
 					React__default.createElement(
 						'div',
 						{ className: 'Select-unique-input-value-wrapper' },
-						this.renderValue(valueArray, isOpen),
-						this.renderClear()
+						React__default.createElement(
+							'div',
+							{ className: 'Select-unique-value' },
+							this.renderValue(valueArray, isOpen, true)
+						),
+						React__default.createElement(
+							'div',
+							{ className: 'Select-unique-value-clear' },
+							this.renderClear()
+						)
 					),
 					React__default.createElement(
 						'div',
@@ -2031,7 +2046,7 @@ var Select$1 = function (_React$Component) {
 								)
 							),
 							React__default.createElement(
-								'span',
+								'div',
 								{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
 								this.renderInput(valueArray, focusedOptionIndex)
 							)
