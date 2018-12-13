@@ -79,7 +79,7 @@
 		padding-right: 8px;
 	}
 
-	&.has-value.Select--single.is-unique > .Select-control .Select-value,
+	&.Select--single.is-unique > .Select-control .Select-value,
 	&.has-value.is-pseudo-focused.Select--single.is-unique > .Select-control .Select-value {
 		.Select-value-label {
 			color: #FFF;
@@ -118,7 +118,7 @@
   &.is-unique > .Select-control {
     border-radius: 4px;
     background: rgba(0,0,0,0.02);
-    height: 40px;
+    height: 42px;
     width: fit-content;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -128,7 +128,7 @@
   }
 
   &.is-unique {
-    &.is-open, &.has-value, &.is-focused, &.is-pseudo-focused {
+    &.is-open, &.is-focused, &.is-pseudo-focused {
       .Select-control {
         background: #2D3F5E;
 
@@ -197,6 +197,10 @@
       max-width: 208px;
     }
 
+    .Select-unique-value {
+      min-height: 21px;
+    }
+
     .Select-unique-input-value-wrapper {
       align-items: center;
       border-bottom: 1px solid lightgray;
@@ -208,6 +212,10 @@
     
     .Select-unique-row-option {
       position: relative;
+
+      &.is-selected {
+        background-color: rgba(0,0,0,0.04);
+      }
     }
 
     .Select-unique-selected-icon-wrapper {
@@ -226,6 +234,7 @@
     
     .Select-unique-icon {
       fill: #000;
+      width: 16px;
     }
 
     .Select-unique-menu-outer-loading {

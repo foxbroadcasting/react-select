@@ -479,6 +479,7 @@ var Option = function (_React$Component) {
 			    optionIndex = _props.optionIndex;
 
 			var className = classNames(this.props.className, option.className);
+			var rowUniqueClassName = "Select-unique-row-option";
 
 			return option.disabled ? React__default.createElement(
 				'div',
@@ -488,7 +489,7 @@ var Option = function (_React$Component) {
 				this.props.children
 			) : React__default.createElement(
 				'div',
-				{ className: 'Select-unique-row-option' },
+				{ className: this.props.isUniqueSelected ? rowUniqueClassName + ' is-selected' : rowUniqueClassName },
 				this.props.isUniqueSelected && React__default.createElement(
 					'span',
 					{ className: 'Select-unique-selected-icon-wrapper' },
@@ -504,7 +505,7 @@ var Option = function (_React$Component) {
 				),
 				React__default.createElement(
 					'div',
-					{ className: this.props.isUniqueSelected ? className : null },
+					{ className: this.props.isUniqueSelected ? className + ' is-selected' : null },
 					React__default.createElement(
 						'div',
 						{ className: this.props.isUniqueSelected ? 'is-selected' : className,
