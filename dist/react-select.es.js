@@ -2251,7 +2251,7 @@ Select$1.defaultProps = {
 	openOnClick: true,
 	optionComponent: Option,
 	pageSize: 5,
-	placeholder: 'Select',
+	placeholder: 'Select...',
 	reorder: false,
 	required: false,
 	scrollMenuIntoView: true,
@@ -2300,7 +2300,7 @@ var defaultProps = {
 	children: defaultChildren,
 	ignoreAccents: true,
 	ignoreCase: true,
-	loadingPlaceholder: '',
+	loadingPlaceholder: 'Loading...',
 	options: [],
 	searchPromptText: 'Type to search'
 };

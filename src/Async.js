@@ -40,7 +40,7 @@ const defaultProps = {
 	children: defaultChildren,
 	ignoreAccents: true,
 	ignoreCase: true,
-	loadingPlaceholder: '',
+	loadingPlaceholder: 'Loading...',
 	options: [],
 	searchPromptText: 'Type to search',
 };
