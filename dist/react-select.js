@@ -1603,6 +1603,7 @@ var Select$1 = function (_React$Component) {
 			var _this5 = this;
 
 			var isUnique = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+			var isTop = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
 			var placeholderDiv = isUnique ? React__default.createElement(
 				'div',
@@ -1614,6 +1615,9 @@ var Select$1 = function (_React$Component) {
 				this.props.placeholder
 			);
 			if (!valueArray.length) {
+				if (isTop) {
+					return placeholderDiv;
+				}
 				return !this.state.inputValue ? placeholderDiv : null;
 			}
 
@@ -1673,6 +1677,7 @@ var Select$1 = function (_React$Component) {
 			    _this6 = this;
 
 			var isUnique = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+			var isSearch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
 			var className = classNames('Select-input', this.props.inputProps.className);
 			var isOpen = !!this.state.isOpen;
@@ -1732,6 +1737,7 @@ var Select$1 = function (_React$Component) {
 			}
 
 			if (this.props.autosize && !isUnique) {
+				if (isSearch) inputProps.placeholder = 'Search';
 				return React__default.createElement(AutosizeInput, _extends({}, inputProps, { minWidth: '5' }));
 			}
 			return React__default.createElement(
@@ -1765,7 +1771,7 @@ var Select$1 = function (_React$Component) {
 	}, {
 		key: 'renderClear',
 		value: function renderClear() {
-			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || this.props.isLoading) return;
+			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled) return;
 			var clear = this.props.clearRenderer();
 
 			return React__default.createElement(
@@ -1994,7 +2000,7 @@ var Select$1 = function (_React$Component) {
 					React__default.createElement(
 						'span',
 						{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-						this.renderValue(valueArray, isOpen),
+						this.renderValue(valueArray, isOpen, false, true),
 						this.renderInput(valueArray, focusedOptionIndex, true)
 					),
 					this.renderArrow()
@@ -2049,7 +2055,7 @@ var Select$1 = function (_React$Component) {
 							React__default.createElement(
 								'div',
 								{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-								this.renderInput(valueArray, focusedOptionIndex)
+								this.renderInput(valueArray, focusedOptionIndex, false, true)
 							)
 						),
 						this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption, true)

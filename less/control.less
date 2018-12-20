@@ -76,6 +76,7 @@
 	}
 
 	&.has-value.is-clearable.Select--single.is-unique > .Select-control .Select-value {
+    max-width: 141px;
 		padding-right: 8px;
 	}
 
@@ -119,11 +120,10 @@
     border-radius: 4px;
     background: rgba(0,0,0,0.02);
     height: 42px;
-    width: fit-content;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
+    max-width: 168px;
     &:hover {
       background: rgba(0,0,0,0.04);
+      border: 1px solid #d5d6df;
     }
   }
 
@@ -172,6 +172,7 @@
 
     .Select-unique-input-list-wrapper .Select-control {
       align-items: center;
+      cursor: text;
       display: flex;
     }
 
@@ -249,6 +250,10 @@
     .Select-option {
       &.is-selected {
         background-color: initial;
+      }
+
+      &.is-focused {
+        background-color: rgba(0,0,0,0.04);
       }
       padding: 8px 0 8px 40px;
     }
