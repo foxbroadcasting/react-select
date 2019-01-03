@@ -754,9 +754,9 @@ class Select extends React.Component {
 			? (<div className="Select-unique-placeholder">No Item Selected</div>)
 			: (<div className="Select-placeholder">{this.props.placeholder}</div>);
 		if (!valueArray.length) {
-      if (isTop) {
-        return placeholderDiv;
-      }
+			if (isTop) {
+				return placeholderDiv;
+			}
 			return !this.state.inputValue ? placeholderDiv : null;
 		}
 
@@ -881,7 +881,7 @@ class Select extends React.Component {
 		}
 		return (
 			<div className={ className } key="input-wrap">
-				<input  {...inputProps} />
+				<input {...inputProps} />
 			</div>
 		);
 	}
@@ -905,8 +905,8 @@ class Select extends React.Component {
     );
   }
 
-	renderClear () {
-		if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled) return;
+	renderClear (isUnique = false) {
+		if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || (!isUnique && this.props.isLoading)) return;
 		const clear = this.props.clearRenderer();
 
 		return (
@@ -1117,7 +1117,7 @@ class Select extends React.Component {
 							{this.renderValue(valueArray, isOpen, true)}
 						</div>
 						<div className="Select-unique-value-clear">
-							{this.renderClear()}
+							{this.renderClear(true)}
 						</div>
 				  </div>
 				  <div className="Select-unique-input-list-wrapper">
@@ -1136,9 +1136,9 @@ class Select extends React.Component {
 				  				<g><path d="M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z" /></g>
 				  			</svg>
 				  		</span>
-							<div className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
-								{this.renderInput(valueArray, focusedOptionIndex, false, true)}
-							</div>
+				  		<div className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+				  			{this.renderInput(valueArray, focusedOptionIndex, false, true)}
+				  		</div>
 				  	</div>
 				  {this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption, true)}
 				  </div>

@@ -125,6 +125,12 @@
       background: rgba(0,0,0,0.04);
       border: 1px solid #d5d6df;
     }
+    .Select-placeholder, .Select-value {
+      color: #000;
+      display: inline-block;
+      padding-top: 2px;
+      position: relative !important;
+    }
   }
 
   &.is-unique {
@@ -141,13 +147,6 @@
         }
       }
     }
-  }
-
-  &.is-unique .Select-placeholder, .Select-value {
-    color: #000;
-    display: inline-block;
-    padding-top: 2px;
-    position: relative !important;
   }
 
   &.is-unique .Select-input {
@@ -197,6 +196,13 @@
 
     .Select-value {
       max-width: 208px;
+
+      .Select-value {
+        color: #000;
+        display: inline-block;
+        padding-top: 2px;
+        position: relative !important;
+      }
     }
 
     .Select-unique-value {
@@ -218,6 +224,9 @@
       &.is-selected {
         background-color: rgba(0,0,0,0.04);
       }
+      &:hover {
+        background-color: rgba(0,0,0,0.04);
+      }
     }
 
     .Select-unique-selected-icon-wrapper {
@@ -235,7 +244,7 @@
     }
     
     .Select-unique-icon {
-      fill: #000;
+      fill: rgba(0, 0, 0, 0.54);
       width: 16px;
     }
 
@@ -253,7 +262,7 @@
       }
 
       &.is-focused {
-        background-color: rgba(0,0,0,0.04);
+        background-color: unset;
       }
       padding: 8px 0 8px 40px;
     }

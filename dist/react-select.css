@@ -93,6 +93,13 @@
   background: rgba(0, 0, 0, 0.04);
   border: 1px solid #d5d6df;
 }
+.Select.is-unique > .Select-control .Select-placeholder,
+.Select.is-unique > .Select-control .Select-value {
+  color: #000;
+  display: inline-block;
+  padding-top: 2px;
+  position: relative !important;
+}
 .Select.is-unique.is-open .Select-control,
 .Select.is-unique.is-focused .Select-control,
 .Select.is-unique.is-pseudo-focused .Select-control {
@@ -110,13 +117,6 @@
 .Select.is-unique.is-focused .Select-control .Select-value .Select-value-label,
 .Select.is-unique.is-pseudo-focused .Select-control .Select-value .Select-value-label {
   color: #FFF;
-}
-.Select.is-unique .Select-placeholder,
-.Select .Select-value {
-  color: #000;
-  display: inline-block;
-  padding-top: 2px;
-  position: relative !important;
 }
 .Select.is-unique .Select-input {
   display: inline-block;
@@ -161,6 +161,12 @@
 .Select.is-unique > .unique-outer-menu .Select-value {
   max-width: 208px;
 }
+.Select.is-unique > .unique-outer-menu .Select-value .Select-value {
+  color: #000;
+  display: inline-block;
+  padding-top: 2px;
+  position: relative !important;
+}
 .Select.is-unique > .unique-outer-menu .Select-unique-value {
   min-height: 21px;
 }
@@ -178,6 +184,9 @@
 .Select.is-unique > .unique-outer-menu .Select-unique-row-option.is-selected {
   background-color: rgba(0, 0, 0, 0.04);
 }
+.Select.is-unique > .unique-outer-menu .Select-unique-row-option:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
 .Select.is-unique > .unique-outer-menu .Select-unique-selected-icon-wrapper {
   align-items: center;
   display: flex;
@@ -191,7 +200,7 @@
   padding-top: 38px;
 }
 .Select.is-unique > .unique-outer-menu .Select-unique-icon {
-  fill: #000;
+  fill: rgba(0, 0, 0, 0.54);
   width: 16px;
 }
 .Select.is-unique > .unique-outer-menu .Select-unique-menu-outer-loading {
@@ -207,7 +216,7 @@
   background-color: initial;
 }
 .Select.is-unique > .unique-outer-menu .Select-option.is-focused {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: unset;
 }
 .Select .Select-option.is-selected {
   display: inline-block;

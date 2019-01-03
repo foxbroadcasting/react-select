@@ -1771,7 +1771,9 @@ var Select$1 = function (_React$Component) {
 	}, {
 		key: 'renderClear',
 		value: function renderClear() {
-			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled) return;
+			var isUnique = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || !isUnique && this.props.isLoading) return;
 			var clear = this.props.clearRenderer();
 
 			return React__default.createElement(
@@ -2019,7 +2021,7 @@ var Select$1 = function (_React$Component) {
 						React__default.createElement(
 							'div',
 							{ className: 'Select-unique-value-clear' },
-							this.renderClear()
+							this.renderClear(true)
 						)
 					),
 					React__default.createElement(
