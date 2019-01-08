@@ -749,15 +749,9 @@ class Select extends React.Component {
 		);
 	}
 
-	renderValue (valueArray, isOpen, isUnique = false, isTop = false) {
-		const placeholderDiv = isUnique
-			? (<div className="Select-unique-placeholder">No Item Selected</div>)
-			: (<div className="Select-placeholder">{this.props.placeholder}</div>);
+	renderValue (valueArray, isOpen) {
 		if (!valueArray.length) {
-			if (isTop) {
-				return placeholderDiv;
-			}
-			return !this.state.inputValue ? placeholderDiv : null;
+			return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
 		}
 
 		if (this.props.multi) {
@@ -810,7 +804,7 @@ class Select extends React.Component {
 		}
 	}
 
-	renderInput (valueArray, focusedOptionIndex, isUnique = false, isSearch = false) {
+	renderInput (valueArray, focusedOptionIndex, isUnique = false) {
 		var className = classNames('Select-input', this.props.inputProps.className);
 		const isOpen = !!this.state.isOpen;
 
@@ -874,7 +868,6 @@ class Select extends React.Component {
 		}
 
 		if (this.props.autosize && !isUnique) {
-			if (isSearch) inputProps.placeholder = 'Search';
 			return (
 				<AutosizeInput {...inputProps} minWidth="5" />
 			);
@@ -905,8 +898,8 @@ class Select extends React.Component {
     );
   }
 
-	renderClear (isUnique = false) {
-		if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || (!isUnique && this.props.isLoading)) return;
+	renderClear () {
+		if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || this.props.isLoading) return;
 		const clear = this.props.clearRenderer();
 
 		return (
@@ -1069,8 +1062,7 @@ class Select extends React.Component {
 		return null;
 	}
 
-	renderOuter (options, valueArray, focusedOption, isUnique = false) {
-		const loadingDiv = (<div className='Select-unique-menu-outer-loading'>Loading...</div>);
+	renderOuter (options, valueArray, focusedOption) {
 		let menu = this.renderMenu(options, valueArray, focusedOption);
 		if (!menu) {
 			return null;
@@ -1082,7 +1074,7 @@ class Select extends React.Component {
 						 style={this.props.menuStyle}
 						 onScroll={this.handleMenuScroll}
 						 onMouseDown={this.handleMouseDownOnMenu}>
-						 {isUnique && this.props.isLoading ? loadingDiv : menu}
+					{menu}
 				</div>
 			</div>
 		);
@@ -1105,20 +1097,16 @@ class Select extends React.Component {
 						onTouchMove={this.handleTouchMove}
 				>
 					<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
-						{this.renderValue(valueArray, isOpen, false, true)}
+						{this.renderValue(valueArray, isOpen)}
 						{this.renderInput(valueArray, focusedOptionIndex, true)}
 					</span>
 					{this.renderArrow()}
 				</div>
 				{isOpen && (
 				<div className="unique-outer-menu">
-					<div className="Select-unique-input-value-wrapper">
-						<div className="Select-unique-value">
-							{this.renderValue(valueArray, isOpen, true)}
-						</div>
-						<div className="Select-unique-value-clear">
-							{this.renderClear(true)}
-						</div>
+				  <div className="Select-unique-input-value-wrapper">
+				  	{this.renderValue(valueArray, isOpen)}
+				  	{this.renderClear()}
 				  </div>
 				  <div className="Select-unique-input-list-wrapper">
 				  	<div
@@ -1136,11 +1124,12 @@ class Select extends React.Component {
 				  				<g><path d="M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z" /></g>
 				  			</svg>
 				  		</span>
-				  		<div className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
-				  			{this.renderInput(valueArray, focusedOptionIndex, false, true)}
-				  		</div>
+				  		<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+				  			{this.renderInput(valueArray, focusedOptionIndex)}
+				  		</span>
+				  		{this.renderLoading()}
 				  	</div>
-				  {this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption, true)}
+				  {this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)}
 				  </div>
         </div>
         )}

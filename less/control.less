@@ -75,18 +75,6 @@
 		padding-right: (@select-clear-width + @select-arrow-width * 5);
 	}
 
-	&.has-value.is-clearable.Select--single.is-unique > .Select-control .Select-value {
-    max-width: 141px;
-		padding-right: 8px;
-	}
-
-	&.Select--single.is-unique > .Select-control .Select-value,
-	&.has-value.is-pseudo-focused.Select--single.is-unique > .Select-control .Select-value {
-		.Select-value-label {
-			color: #FFF;
-		}
-	}
-
 	&.has-value.Select--single > .Select-control .Select-value,
 	&.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value {
 		.Select-value-label {
@@ -116,117 +104,45 @@
 	}
 
   // Unique select
-  &.is-unique > .Select-control {
-    border-radius: 4px;
-    background: rgba(0,0,0,0.02);
-    height: 42px;
-    max-width: 168px;
-    &:hover {
-      background: rgba(0,0,0,0.04);
-      border: 1px solid #d5d6df;
-    }
-    .Select-placeholder, .Select-value {
-      color: #000;
-      display: inline-block;
-      padding-top: 2px;
-      position: relative !important;
-    }
-  }
-
-  &.is-unique {
-    &.is-open, &.is-focused, &.is-pseudo-focused {
-      .Select-control {
-        background: #2D3F5E;
-
-        .Select-arrow-zone span svg {
-          fill: #FFF;
-        }
-
-        .Select-placeholder, .Select-value .Select-value-label {
-          color: #FFF;
-        }
-      }
-    }
-  }
-
-  &.is-unique .Select-input {
-    display: inline-block;
-    height: 0px;
-    padding-left: 5px;
-    position: absolute;
-    width: 0px;
-  }
-
   &.is-unique > .unique-outer-menu {
     background-color: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.32);
-    border-radius: 4px;
+    box-shadow: 0px 5px 7px 3px rgba(163,163,163,1);
+    border-radius: 5px;
     margin-top: 4px;
-    right: 0px;
+    right: 10px;
     position: absolute;
-    max-width: 320px;
-    min-height: 305px;
-    width: 320px;
+    max-width: 260px;
+    width: 260px;
     z-index: 1;
 
-    .Select-unique-input-list-wrapper .Select-control {
-      align-items: center;
-      cursor: text;
-      display: flex;
+    .Select-input {
+      padding-left: 5px;
     }
 
     .Select-control {
-      background: #FFF;
-      border-radius: 4px;
-      margin: 15px;
-      max-width: 290px;
-      padding: 10px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
     }
 
     .Select-menu-outer {
       border: none;
-      box-shadow: none;
-      margin-bottom: 12px;
       position: relative;
-    }
-
-    .Select-clear-zone {
-      margin-right: 16px;
-    }
-
-    .Select-value {
-      max-width: 208px;
-
-      .Select-value {
-        color: #000;
-        display: inline-block;
-        padding-top: 2px;
-        position: relative !important;
-      }
-    }
-
-    .Select-unique-value {
-      min-height: 21px;
     }
 
     .Select-unique-input-value-wrapper {
-      align-items: center;
-      border-bottom: 1px solid lightgray;
       display: flex;
       justify-content: space-between;
-      padding: 20px 16px 16px 16px;
-      overflow: auto;
+      padding: 15px;
+      border-bottom: 1px solid lightgray;
     }
     
+    .Select-unique-input-list-wrapper {
+      padding: 0 15px 0 15px;
+    }
+
     .Select-unique-row-option {
       position: relative;
-
-      &.is-selected {
-        background-color: rgba(0,0,0,0.04);
-      }
-      &:hover {
-        background-color: rgba(0,0,0,0.04);
-      }
     }
 
     .Select-unique-selected-icon-wrapper {
@@ -234,37 +150,28 @@
       display: flex;
       float: left;
       height: 100%;
-      padding-left: 16px;
       position: absolute;
     }
 
     .Select-unique-search-icon-wrapper {
-      width: 20px;
-      padding-top: 38px;
+      padding-left: 10px;
     }
     
     .Select-unique-icon {
-      fill: rgba(0, 0, 0, 0.54);
-      width: 16px;
-    }
-
-    .Select-unique-menu-outer-loading {
-      padding: 8px 24px 8px 36px;
-    }
-
-    .Select-unique-placeholder {
-      color: rgba(0,0,0,0.38);
+      display: inline-flex;
+      vertical-align: middle;
+      fill: lightgray;
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      min-height: 20px;
     }
 
     .Select-option {
       &.is-selected {
         background-color: initial;
       }
-
-      &.is-focused {
-        background-color: unset;
-      }
-      padding: 8px 0 8px 40px;
+      padding: 8px 0 8px 22px;
     }
   }
 
@@ -428,7 +335,6 @@
 	text-align: center;
 	vertical-align: middle;
 	width: (@select-arrow-width * 5);
-	padding-top: @select-arrow-width;
 	padding-right: @select-arrow-width;
 }
 

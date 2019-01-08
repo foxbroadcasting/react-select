@@ -71,7 +71,6 @@ class Option extends React.Component {
 	render () {
 		var { option, instancePrefix, optionIndex } = this.props;
 		var className = classNames(this.props.className, option.className);
-    var rowUniqueClassName = "Select-unique-row-option";
 
 		return option.disabled ? (
 			<div className={className}
@@ -80,7 +79,7 @@ class Option extends React.Component {
 				{this.props.children}
 			</div>
 		) : (
-      <div className={this.props.isUniqueSelected ? `${rowUniqueClassName} is-selected`: rowUniqueClassName}>
+      <div className="Select-unique-row-option">
 				{this.props.isUniqueSelected && (
 					<span className="Select-unique-selected-icon-wrapper">
 						<svg className="Select-unique-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
@@ -88,7 +87,7 @@ class Option extends React.Component {
 						</svg>
 					</span>
 				)}
-				<div className={this.props.isUniqueSelected ? className + ' is-selected' : null}>
+				<div className={this.props.isUniqueSelected ? className : null}>
 					<div className={this.props.isUniqueSelected ? 'is-selected': className}
 						style={option.style}
 						role="option"
