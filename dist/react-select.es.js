@@ -9,10 +9,21 @@ import { DragDropContext, DragSource, DropTarget } from 'react-dnd';
 function arrowRenderer(_ref) {
 	var onMouseDown = _ref.onMouseDown;
 
-	return React.createElement('span', {
-		className: 'Select-arrow',
-		onMouseDown: onMouseDown
-	});
+	return React.createElement(
+		'span',
+		{
+			onMouseDown: onMouseDown
+		},
+		React.createElement(
+			'svg',
+			{ viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
+			React.createElement(
+				'g',
+				null,
+				React.createElement('path', { d: 'M7.41 8.84L12 13.42l4.59-4.58L18 10.25l-6 6-6-6z' })
+			)
+		)
+	);
 }
 
 arrowRenderer.propTypes = {
@@ -463,6 +474,7 @@ var Option = function (_React$Component) {
 			    optionIndex = _props.optionIndex;
 
 			var className = classNames(this.props.className, option.className);
+			var rowUniqueClassName = "Select-unique-row-option";
 
 			return option.disabled ? React.createElement(
 				'div',
@@ -472,7 +484,7 @@ var Option = function (_React$Component) {
 				this.props.children
 			) : React.createElement(
 				'div',
-				{ className: 'Select-unique-row-option' },
+				{ className: this.props.isUniqueSelected ? rowUniqueClassName + ' is-selected' : rowUniqueClassName },
 				this.props.isUniqueSelected && React.createElement(
 					'span',
 					{ className: 'Select-unique-selected-icon-wrapper' },
@@ -488,7 +500,7 @@ var Option = function (_React$Component) {
 				),
 				React.createElement(
 					'div',
-					{ className: this.props.isUniqueSelected ? className : null },
+					{ className: this.props.isUniqueSelected ? className + ' is-selected' : null },
 					React.createElement(
 						'div',
 						{ className: this.props.isUniqueSelected ? 'is-selected' : className,
@@ -1585,12 +1597,23 @@ var Select$1 = function (_React$Component) {
 		value: function renderValue(valueArray, isOpen) {
 			var _this5 = this;
 
+			var isUnique = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+			var isTop = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+			var placeholderDiv = isUnique ? React.createElement(
+				'div',
+				{ className: 'Select-unique-placeholder' },
+				'No Item Selected'
+			) : React.createElement(
+				'div',
+				{ className: 'Select-placeholder' },
+				this.props.placeholder
+			);
 			if (!valueArray.length) {
-				return !this.state.inputValue ? React.createElement(
-					'div',
-					{ className: 'Select-placeholder' },
-					this.props.placeholder
-				) : null;
+				if (isTop) {
+					return placeholderDiv;
+				}
+				return !this.state.inputValue ? placeholderDiv : null;
 			}
 
 			if (this.props.multi) {
@@ -1649,6 +1672,7 @@ var Select$1 = function (_React$Component) {
 			    _this6 = this;
 
 			var isUnique = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+			var isSearch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
 			var className = classNames('Select-input', this.props.inputProps.className);
 			var isOpen = !!this.state.isOpen;
@@ -1708,6 +1732,7 @@ var Select$1 = function (_React$Component) {
 			}
 
 			if (this.props.autosize && !isUnique) {
+				if (isSearch) inputProps.placeholder = 'Search';
 				return React.createElement(AutosizeInput, _extends({}, inputProps, { minWidth: '5' }));
 			}
 			return React.createElement(
@@ -1741,7 +1766,9 @@ var Select$1 = function (_React$Component) {
 	}, {
 		key: 'renderClear',
 		value: function renderClear() {
-			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || this.props.isLoading) return;
+			var isUnique = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+			if (!this.props.clearable || this.props.value === undefined || this.props.value === null || this.props.multi && !this.props.value.length || this.props.disabled || !isUnique && this.props.isLoading) return;
 			var clear = this.props.clearRenderer();
 
 			return React.createElement(
@@ -1911,6 +1938,13 @@ var Select$1 = function (_React$Component) {
 		value: function renderOuter(options, valueArray, focusedOption) {
 			var _this8 = this;
 
+			var isUnique = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+			var loadingDiv = React.createElement(
+				'div',
+				{ className: 'Select-unique-menu-outer-loading' },
+				'Loading...'
+			);
 			var menu = this.renderMenu(options, valueArray, focusedOption);
 			if (!menu) {
 				return null;
@@ -1929,7 +1963,7 @@ var Select$1 = function (_React$Component) {
 						style: this.props.menuStyle,
 						onScroll: this.handleMenuScroll,
 						onMouseDown: this.handleMouseDownOnMenu },
-					menu
+					isUnique && this.props.isLoading ? loadingDiv : menu
 				)
 			);
 		}
@@ -1963,7 +1997,7 @@ var Select$1 = function (_React$Component) {
 					React.createElement(
 						'span',
 						{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-						this.renderValue(valueArray, isOpen),
+						this.renderValue(valueArray, isOpen, false, true),
 						this.renderInput(valueArray, focusedOptionIndex, true)
 					),
 					this.renderArrow()
@@ -1974,8 +2008,16 @@ var Select$1 = function (_React$Component) {
 					React.createElement(
 						'div',
 						{ className: 'Select-unique-input-value-wrapper' },
-						this.renderValue(valueArray, isOpen),
-						this.renderClear()
+						React.createElement(
+							'div',
+							{ className: 'Select-unique-value' },
+							this.renderValue(valueArray, isOpen, true)
+						),
+						React.createElement(
+							'div',
+							{ className: 'Select-unique-value-clear' },
+							this.renderClear(true)
+						)
 					),
 					React.createElement(
 						'div',
@@ -2008,13 +2050,12 @@ var Select$1 = function (_React$Component) {
 								)
 							),
 							React.createElement(
-								'span',
+								'div',
 								{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
-								this.renderInput(valueArray, focusedOptionIndex)
-							),
-							this.renderLoading()
+								this.renderInput(valueArray, focusedOptionIndex, false, true)
+							)
 						),
-						this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption)
+						this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption, true)
 					)
 				)
 			);
