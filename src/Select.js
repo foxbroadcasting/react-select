@@ -925,7 +925,8 @@ class Select extends React.Component {
 	renderArrow () {
 		const onMouseDown = this.handleMouseDownOnArrow;
 		const isOpen = this.state.isOpen;
-		const arrow = this.props.arrowRenderer({ onMouseDown, isOpen });
+	  const isUnique = this.props.type === 'unique';
+		const arrow = this.props.arrowRenderer({ onMouseDown, isOpen, isUnique });
 
 		return (
 			<span

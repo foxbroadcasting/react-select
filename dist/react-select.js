@@ -12,26 +12,35 @@ classNames = classNames && classNames.hasOwnProperty('default') ? classNames['de
 HTML5Backend = HTML5Backend && HTML5Backend.hasOwnProperty('default') ? HTML5Backend['default'] : HTML5Backend;
 
 function arrowRenderer(_ref) {
-	var onMouseDown = _ref.onMouseDown;
+	var onMouseDown = _ref.onMouseDown,
+	    isUnique = _ref.isUnique;
 
-	return React__default.createElement(
-		'span',
-		{
-			onMouseDown: onMouseDown
-		},
-		React__default.createElement(
-			'svg',
-			{ viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
+	if (isUnique) {
+		return React__default.createElement(
+			'span',
+			{
+				onMouseDown: onMouseDown
+			},
 			React__default.createElement(
-				'g',
-				null,
-				React__default.createElement('path', { d: 'M7.41 8.84L12 13.42l4.59-4.58L18 10.25l-6 6-6-6z' })
+				'svg',
+				{ viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
+				React__default.createElement(
+					'g',
+					null,
+					React__default.createElement('path', { d: 'M7.41 8.84L12 13.42l4.59-4.58L18 10.25l-6 6-6-6z' })
+				)
 			)
-		)
-	);
+		);
+	} else {
+		return React__default.createElement('span', {
+			className: 'Select-arrow',
+			onMouseDown: onMouseDown
+		});
+	}
 }
 
 arrowRenderer.propTypes = {
+	isUnique: PropTypes.bool,
 	onMouseDown: PropTypes.func
 };
 
@@ -1793,7 +1802,8 @@ var Select$1 = function (_React$Component) {
 		value: function renderArrow() {
 			var onMouseDown = this.handleMouseDownOnArrow;
 			var isOpen = this.state.isOpen;
-			var arrow = this.props.arrowRenderer({ onMouseDown: onMouseDown, isOpen: isOpen });
+			var isUnique = this.props.type === 'unique';
+			var arrow = this.props.arrowRenderer({ onMouseDown: onMouseDown, isOpen: isOpen, isUnique: isUnique });
 
 			return React__default.createElement(
 				'span',
