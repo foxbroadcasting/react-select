@@ -922,10 +922,10 @@ class Select extends React.Component {
 		);
 	}
 
-	renderArrow () {
+	renderArrow (isUnique = false) {
 		const onMouseDown = this.handleMouseDownOnArrow;
 		const isOpen = this.state.isOpen;
-		const arrow = this.props.arrowRenderer({ onMouseDown, isOpen });
+		const arrow = this.props.arrowRenderer({ onMouseDown, isOpen, isUnique });
 
 		return (
 			<span
@@ -1108,7 +1108,7 @@ class Select extends React.Component {
 						{this.renderValue(valueArray, isOpen, false, true)}
 						{this.renderInput(valueArray, focusedOptionIndex, true)}
 					</span>
-					{this.renderArrow()}
+					{this.renderArrow(true)}
 				</div>
 				{isOpen && (
 				<div className="unique-outer-menu">
