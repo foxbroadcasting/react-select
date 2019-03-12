@@ -2,7 +2,6 @@ import React from 'react';
 import createClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import Highlighter from 'react-highlight-words';
 
 var DisabledUpsellOptions = createClass({
 	displayName: 'DisabledUpsellOptions',
@@ -23,10 +22,7 @@ var DisabledUpsellOptions = createClass({
 	},
 	renderOption: function(option) {
 		return (
-			<Highlighter
-			  searchWords={[this._inputValue]}
-			  textToHighlight={option.label}
-			/>
+			<div>Custom Render</div>
 		);
 	},
 	renderValue: function(option) {
